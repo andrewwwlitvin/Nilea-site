@@ -3,66 +3,251 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Nilea — a mobile-first dashboard for monitoring subscriber-level risk and detected content leaks." />
   <title>Nilea</title>
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #111318;
+      --muted: #5a6372;
+      --border: #e7e9ee;
+
+      /* Calm accent (single color used for links + primary button) */
+      --accent: #2F6F6D;
+      --accent-hover: #265b59;
+
+      --max: 720px;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 44px auto;
+      padding: 0 18px;
+    }
+
+    @media (max-width: 420px) {
+      .wrap { margin: 28px auto; padding: 0 16px; }
+    }
+
+    .hero h1{
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+    @media (max-width: 420px) {
+      .hero h1 { font-size: 30px; }
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: #fff;
+    }
+
+    .h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .ctaRow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btnPrimary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+    .btnPrimary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      text-decoration: none;
+    }
+
+    .btnSecondary:hover { text-decoration: none; border-color: #cfd5e1; }
+
+    .meta {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .grid2 { grid-template-columns: 1fr; }
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footerLinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin: 10px 0 0;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+  </style>
 </head>
+
 <body>
-  <main style="max-width:720px;margin:48px auto;padding:0 16px;font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;">
-    <h1 style="margin:0 0 8px;">Nilea for creators — coming soon</h1>
-    <p style="margin:0 0 24px;">
-      A prevention-first tool to understand audience-related risk before it turns into exposure.
-    </p>
+  <main class="wrap">
+    <section class="hero">
+      <span class="kicker">Nilea</span>
+      <h1>Nilea for creators — coming soon</h1>
+      <p class="lead">
+        A mobile-first dashboard for monitoring subscriber-level risk and detected content leaks.
+      </p>
+      <p class="p">
+        Nilea brings signals and findings into one place for review.
+        Data is based on creator-provided inputs, observable patterns, and periodic scans for leaked content.
+      </p>
 
-    <h2 style="margin:0 0 8px;font-size:18px;">Subscribe for updates</h2>
-    <p style="margin:0 0 16px;">
-      <a href="https://form.typeform.com/to/N1bg9Jig">Leave your email</a>
-      <br><small style="color:#555;">Occasional updates. No spam.</small>
-    </p>
+      <div class="ctaRow">
+        <a class="btn btnPrimary" href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener noreferrer">
+          Subscribe for updates
+        </a>
+        <a class="btn btnSecondary" href="#agencies">
+          Agencies
+        </a>
+      </div>
+      <p class="meta">Occasional updates only. No spam.</p>
+    </section>
 
-    <hr style="margin:28px 0;border:none;border-top:1px solid #eee;" />
+    <hr class="divider" />
 
-    <h2 style="margin:0 0 8px;font-size:18px;">Follow</h2>
-    <p style="margin:0 0 24px;color:#555;">
-      X · Instagram · Telegram · LinkedIn (placeholders)
-    </p>
+    <section class="grid2">
+      <div class="card">
+        <h2 class="h2">What we’re learning</h2>
+        <p class="p">
+          Many creators don’t think about “leaks” as a legal problem.
+          They think about trust, uncertainty, and who in their audience might be risky.
+        </p>
+        <p class="p">
+          Our first focus is understanding risk within the subscriber base — before anything escalates.
+        </p>
+      </div>
 
-    <h2 style="margin:0 0 8px;font-size:18px;">For agencies</h2>
-    <p style="margin:0 0 12px;">
-      Within agencies, the impact of a single leak scales across the entire roster.
-    </p>
-    <p style="margin:0 0 16px;">
-      <a href="https://form.typeform.com/to/CQhAedgU">Share your perspective (agency form)</a>
-      <br><small style="color:#555;">Early access research · No sales pitch</small>
-    </p>
+      <div class="card">
+        <h2 class="h2">Two simple lines we keep coming back to</h2>
+        <p class="p">“Being a creator doesn’t mean everyone gets to see your content.”</p>
+        <p class="p">“Creators decide when their inner circle gets to know — not content pirates.”</p>
+      </div>
+    </section>
 
-    <hr style="margin:28px 0;border:none;border-top:1px solid #eee;" />
+    <hr class="divider" />
 
-    <footer style="color:#555;">
-      <p style="margin:0 0 10px;"><strong>Nilea</strong></p>
-      <p style="margin:0 0 10px;">
-        <a href="#">How to use Nilea</a> ·
-        <a href="#">Agencies</a> ·
-        <a href="#">Team behind Nilea</a> ·
+    <section>
+      <h2 class="h2">Follow</h2>
+      <p class="p">
+        X · Instagram · Telegram · LinkedIn (placeholders)
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="agencies" class="card">
+      <h2 class="h2">For agencies</h2>
+      <p class="p">
+        Inside agencies, leak-related risk scales with the roster.
+        When one creator is affected, the stress spreads across the team.
+      </p>
+      <div class="ctaRow">
+        <a class="btn btnPrimary" href="https://form.typeform.com/to/CQhAedgU" target="_blank" rel="noopener noreferrer">
+          Share your perspective (agency form)
+        </a>
+        <a class="btn btnSecondary" href="TYPEFORM_UPDATES_URL" target="_blank" rel="noopener noreferrer">
+          Subscribe for updates
+        </a>
+      </div>
+      <p class="meta">Early access research · No sales pitch</p>
+    </section>
+
+    <footer>
+      <div><strong style="color: var(--text);">Nilea</strong></div>
+      <div class="footerLinks">
+        <a href="#">How to use Nilea</a>
+        <a href="#">Team behind Nilea</a>
         <a href="#">Blog</a>
-      </p>
-      <p style="margin:0 0 10px;">
-        <a href="#">Become an affiliate partner</a> ·
-        <a href="#">Join our influencers</a>
-      </p>
-      <p style="margin:0 0 10px;">
-        <a href="#">Ask for help</a> ·
+        <a href="#agencies">Agencies</a>
+        <a href="#">Become Affiliate partner</a>
+        <a href="#">Join our Influencers</a>
+        <a href="#">Ask for help</a>
         <a href="mailto:hello@nilea.io">Contact</a>
-      </p>
-      <p style="margin:0;">
-        <a href="#">Terms</a> · <a href="#">Privacy</a>
-      </p>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
     </footer>
   </main>
-
-  <!-- Tiny mobile spacing tweak -->
-  <script>
-    if (window.matchMedia && window.matchMedia("(max-width: 420px)").matches) {
-      document.querySelector("main").style.margin = "28px auto";
-    }
-  </script>
 </body>
 </html>
