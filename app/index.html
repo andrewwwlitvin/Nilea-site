@@ -87,7 +87,7 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTk0MjksImV4cCI6MjA4MzM5NTQyOX0.aPZRvUOAy4fDUKHj79GqBmo_wvlQBv0p2it9gff6xdA";
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+    
     const els = {
       loggedOut: document.getElementById("loggedOut"),
       loggedIn: document.getElementById("loggedIn"),
@@ -114,6 +114,7 @@
       if (!code) return;
 
       const { error } = await supabase.auth.exchangeCodeForSession(code);
+
       // Clean URL regardless (avoid re-exchange on refresh)
       url.searchParams.delete("code");
       window.history.replaceState({}, document.title, url.toString());
@@ -125,7 +126,8 @@
     }
 
     async function render() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) console.warn(error);
 
       if (!session?.user) {
         hide(els.loggedIn);
@@ -172,10 +174,17 @@
       els.status.textContent = "Check your email for the sign-in link.";
     });
 
-    // Logout
+    // Logout (more robust)
     els.logoutBtn.addEventListener("click", async () => {
-      await supabase.auth.signOut();
-      await render();
+      els.status.textContent = "";
+      const { error } = await supabase.auth.signOut({ scope: "local" });
+      if (error) {
+        console.error(error);
+        els.status.textContent = "Couldn’t log out. Please refresh and try again.";
+        return;
+      }
+      // Force a clean UI state
+      window.location.replace("/app/");
     });
 
     // Boot
