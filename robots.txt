@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /app/
+
+Sitemap: https://nilea.io/sitemap.xml
