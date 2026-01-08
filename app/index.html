@@ -30,7 +30,6 @@
     }
     .btnPrimary{border-color:var(--accent); background:var(--accent); color:#fff;}
     .btnPrimary:hover{background:var(--accentHover); border-color:var(--accentHover);}
-    .btn:hover{text-decoration:none}
     .btn[disabled]{opacity:.6; cursor:not-allowed;}
 
     .card{
@@ -51,6 +50,7 @@
     .hidden{display:none;}
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <div class="topbar">
@@ -60,8 +60,8 @@
 
     <div id="statusTop" class="meta"></div>
 
-    <!-- Logged out view -->
-    <section id="loggedOut" class="card hidden">
+    <!-- SAFE DEFAULT: logged-out view is visible by default -->
+    <section id="loggedOut" class="card">
       <h1>Sign in</h1>
       <p>Enter your email — we’ll send a magic link.</p>
 
@@ -78,13 +78,18 @@
       <h1 id="welcomeTitle">Welcome</h1>
       <p>This is your Nilea space. More is coming soon.</p>
     </section>
+
+    <noscript>
+      <p class="meta">JavaScript is required to sign in.</p>
+    </noscript>
   </main>
 
   <script type="module">
+    // Cache-bust the ESM import slightly (helps on some Safari caches)
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
     // ✅ Replace these:
-    const SUPABASE_URL = "https://zcpwbllgsgeoenwarqop.supabase.co";
+    const SUPABASE_URL = "https://zcpwbllgsgeoenwarqop.supabase.co/";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTk0MjksImV4cCI6MjA4MzM5NTQyOX0.aPZRvUOAy4fDUKHj79GqBmo_wvlQBv0p2it9gff6xdA";
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -101,10 +106,7 @@
 
     function show(el){ el.classList.remove("hidden"); }
     function hide(el){ el.classList.add("hidden"); }
-
-    function setStatus(msg="") {
-      els.statusTop.textContent = msg;
-    }
+    function setStatus(msg=""){ els.statusTop.textContent = msg; }
 
     function usernameFromUser(user) {
       const email = user?.email || "";
@@ -120,6 +122,7 @@
 
       const { error } = await supabase.auth.exchangeCodeForSession(code);
 
+      // Clean URL to avoid re-exchange on refresh
       url.searchParams.delete("code");
       window.history.replaceState({}, document.title, url.toString());
 
@@ -133,18 +136,28 @@
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session?.user) {
+        // Logged out
         hide(els.loggedIn);
         hide(els.logoutBtn);
         show(els.loggedOut);
-        setStatus("");
         return;
       }
 
+      // Logged in
       const name = usernameFromUser(session.user);
       els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
       hide(els.loggedOut);
       show(els.loggedIn);
       show(els.logoutBtn);
+    }
+
+    async function hardResetToLoggedOut() {
+      // Make UI deterministic even if Safari caches something odd
+      hide(els.loggedIn);
+      hide(els.logoutBtn);
+      show(els.loggedOut);
+      els.logoutBtn.disabled = false;
+      els.logoutBtn.textContent = "Log out";
       setStatus("");
     }
 
@@ -152,11 +165,7 @@
     els.sendLinkBtn.addEventListener("click", async () => {
       const email = (els.email.value || "").trim();
       setStatus("");
-
-      if (!email) {
-        setStatus("Please enter your email.");
-        return;
-      }
+      if (!email) { setStatus("Please enter your email."); return; }
 
       els.sendLinkBtn.disabled = true;
       els.sendLinkBtn.textContent = "Sending…";
@@ -174,38 +183,46 @@
         setStatus("Couldn’t send link. Please try again.");
         return;
       }
-
       setStatus("Check your email for the sign-in link.");
     });
 
-    // Logout (force UI update)
+    // Logout (deterministic)
     els.logoutBtn.addEventListener("click", async () => {
       setStatus("");
       els.logoutBtn.disabled = true;
       els.logoutBtn.textContent = "Logging out…";
 
-      const { error } = await supabase.auth.signOut({ scope: "local" });
+      // Fallback: if Safari hangs, we still recover UI after ~1.2s
+      const fallback = setTimeout(() => {
+        hardResetToLoggedOut();
+      }, 1200);
 
-      els.logoutBtn.disabled = false;
-      els.logoutBtn.textContent = "Log out";
-
-      if (error) {
-        console.error(error);
-        setStatus("Couldn’t log out. Please refresh and try again.");
-        return;
+      try {
+        const { error } = await supabase.auth.signOut({ scope: "local" });
+        if (error) {
+          console.error(error);
+          setStatus("Couldn’t log out. Please refresh and try again.");
+          return;
+        }
+        await hardResetToLoggedOut();
+      } finally {
+        clearTimeout(fallback);
       }
-
-      // ✅ Don’t rely on refresh or auth event — re-render immediately
-      await render();
     });
 
-    // Boot
-    await exchangeCodeIfPresent();
-    await render();
+    // Boot with strong error handling: never allow "blank" state
+    try {
+      await exchangeCodeIfPresent();
+      await render();
 
-    // Still keep this as a backup signal
-    supabase.auth.onAuthStateChange(() => render());
+      supabase.auth.onAuthStateChange(() => {
+        render().catch(() => hardResetToLoggedOut());
+      });
+    } catch (e) {
+      console.error(e);
+      setStatus("App error. Please refresh.");
+      await hardResetToLoggedOut();
+    }
   </script>
 </body>
 </html>
-
