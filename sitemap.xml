@@ -8,7 +8,13 @@
   </url>
 
   <url>
-    <loc>https://nilea.io/notes/what-nilea-is/</loc>
+    <loc>https://nilea.io/notes/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://nilea.io/notes/what-nilea-is.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
