@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nilea — App</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg:#fff; --text:#111318; --muted:#5a6372; --border:#e7e9ee;
+      --accent:#2F6F6D; --accentHover:#265b59;
+      --radius:14px;
+      --max:720px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    .wrap{max-width:var(--max); margin:44px auto; padding:0 18px;}
+    @media (max-width:420px){ .wrap{margin:28px auto; padding:0 16px;} }
+
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px;}
+    .brand{font-weight:600; letter-spacing:-0.01em;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:12px; border:1px solid var(--border);
+      background:#fff; color:var(--text); cursor:pointer; text-decoration:none;
+    }
+    .btnPrimary{border-color:var(--accent); background:var(--accent); color:#fff;}
+    .btnPrimary:hover{background:var(--accentHover); border-color:var(--accentHover);}
+    .btn[disabled]{opacity:.6; cursor:not-allowed;}
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      background:#fff;
+    }
+    h1{margin:0 0 10px; font-size:26px; letter-spacing:-0.02em; line-height:1.2;}
+    p{margin:0 0 12px; color:var(--muted);}
+    label{display:block; margin:0 0 6px; color:var(--muted); font-size:14px;}
+    input{
+      width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--border);
+      font:inherit;
+    }
+    .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .meta{margin:8px 0 14px; font-size:13px; color:var(--muted);}
+    .hidden{display:none;}
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand">Nilea</div>
+      <button id="logoutBtn" class="btn hidden" type="button">Log out</button>
+    </div>
+
+    <div id="statusTop" class="meta"></div>
+
+    <!-- SAFE DEFAULT: logged-out view is visible by default -->
+    <section id="loggedOut" class="card">
+      <h1>Sign in</h1>
+      <p>Enter your email — we’ll send a magic link.</p>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" placeholder="you@example.com" />
+
+      <div class="row">
+        <button id="sendLinkBtn" class="btn btnPrimary" type="button">Send sign-in link</button>
+      </div>
+    </section>
+
+    <!-- Logged in view -->
+    <section id="loggedIn" class="card hidden">
+      <h1 id="welcomeTitle">Welcome</h1>
+      <p>This is your Nilea space. More is coming soon.</p>
+    </section>
+
+    <noscript>
+      <p class="meta">JavaScript is required to sign in.</p>
+    </noscript>
+  </main>
+
+  <script type="module">
+    // Cache-bust the ESM import slightly (helps on some Safari caches)
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    // ✅ Replace these:
+    const SUPABASE_URL = "https://zcpwbllgsgeoenwarqop.supabase.co/";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTk0MjksImV4cCI6MjA4MzM5NTQyOX0.aPZRvUOAy4fDUKHj79GqBmo_wvlQBv0p2it9gff6xdA";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const els = {
+      loggedOut: document.getElementById("loggedOut"),
+      loggedIn: document.getElementById("loggedIn"),
+      logoutBtn: document.getElementById("logoutBtn"),
+      email: document.getElementById("email"),
+      sendLinkBtn: document.getElementById("sendLinkBtn"),
+      welcomeTitle: document.getElementById("welcomeTitle"),
+      statusTop: document.getElementById("statusTop"),
+    };
+
+    function show(el){ el.classList.remove("hidden"); }
+    function hide(el){ el.classList.add("hidden"); }
+    function setStatus(msg=""){ els.statusTop.textContent = msg; }
+
+    function usernameFromUser(user) {
+      const email = user?.email || "";
+      const local = email.includes("@") ? email.split("@")[0] : email;
+      const metaName = user?.user_metadata?.name;
+      return (metaName && String(metaName).trim()) || local || "there";
+    }
+
+    async function exchangeCodeIfPresent() {
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get("code");
+      if (!code) return;
+
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+      // Clean URL to avoid re-exchange on refresh
+      url.searchParams.delete("code");
+      window.history.replaceState({}, document.title, url.toString());
+
+      if (error) {
+        console.error(error);
+        setStatus("Sign-in failed. Please try again.");
+      }
+    }
+
+    async function render() {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.user) {
+        // Logged out
+        hide(els.loggedIn);
+        hide(els.logoutBtn);
+        show(els.loggedOut);
+        return;
+      }
+
+      // Logged in
+      const name = usernameFromUser(session.user);
+      els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
+      hide(els.loggedOut);
+      show(els.loggedIn);
+      show(els.logoutBtn);
+    }
+
+    async function hardResetToLoggedOut() {
+      // Make UI deterministic even if Safari caches something odd
+      hide(els.loggedIn);
+      hide(els.logoutBtn);
+      show(els.loggedOut);
+      els.logoutBtn.disabled = false;
+      els.logoutBtn.textContent = "Log out";
+      setStatus("");
+    }
+
+    // Send magic link
+    els.sendLinkBtn.addEventListener("click", async () => {
+      const email = (els.email.value || "").trim();
+      setStatus("");
+      if (!email) { setStatus("Please enter your email."); return; }
+
+      els.sendLinkBtn.disabled = true;
+      els.sendLinkBtn.textContent = "Sending…";
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${window.location.origin}/app/` }
+      });
+
+      els.sendLinkBtn.disabled = false;
+      els.sendLinkBtn.textContent = "Send sign-in link";
+
+      if (error) {
+        console.error(error);
+        setStatus("Couldn’t send link. Please try again.");
+        return;
+      }
+      setStatus("Check your email for the sign-in link.");
+    });
+
+    // Logout (deterministic)
+    els.logoutBtn.addEventListener("click", async () => {
+      setStatus("");
+      els.logoutBtn.disabled = true;
+      els.logoutBtn.textContent = "Logging out…";
+
+      // Fallback: if Safari hangs, we still recover UI after ~1.2s
+      const fallback = setTimeout(() => {
+        hardResetToLoggedOut();
+      }, 1200);
+
+      try {
+        const { error } = await supabase.auth.signOut({ scope: "local" });
+        if (error) {
+          console.error(error);
+          setStatus("Couldn’t log out. Please refresh and try again.");
+          return;
+        }
+        await hardResetToLoggedOut();
+      } finally {
+        clearTimeout(fallback);
+      }
+    });
+
+    // Boot with strong error handling: never allow "blank" state
+    try {
+      await exchangeCodeIfPresent();
+      await render();
+
+      supabase.auth.onAuthStateChange(() => {
+        render().catch(() => hardResetToLoggedOut());
+      });
+    } catch (e) {
+      console.error(e);
+      setStatus("App error. Please refresh.");
+      await hardResetToLoggedOut();
+    }
+  </script>
+</body>
+</html>
