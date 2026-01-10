@@ -48,6 +48,10 @@
     .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     .meta{margin:8px 0 14px; font-size:13px; color:var(--muted);}
     .hidden{display:none;}
+
+    /* --- Typeform container spacing --- */
+    .tfWrap{margin-top:14px;}
+    .tfHint{margin-top:10px; font-size:13px; color:var(--muted);}
   </style>
 </head>
 
@@ -77,6 +81,10 @@
     <section id="loggedIn" class="card hidden">
       <h1 id="welcomeTitle">Welcome</h1>
       <p>This is your Nilea space. More is coming soon.</p>
+
+      <!-- Typeform mounts here -->
+      <div class="tfWrap" id="typeformMount"></div>
+      <div class="tfHint" id="typeformHint" class="meta"></div>
     </section>
 
     <noscript>
@@ -92,6 +100,10 @@
     const SUPABASE_URL = "https://zcpwbllgsgeoenwarqop.supabase.co/";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTk0MjksImV4cCI6MjA4MzM5NTQyOX0.aPZRvUOAy4fDUKHj79GqBmo_wvlQBv0p2it9gff6xdA";
 
+    // ✅ Your Typeform LIVE embed id (from the code Typeform gave you)
+    // Example: <div data-tf-live="01KEMK..."></div>
+    const TYPEFORM_LIVE_ID = "01KEMKDGGZ6RVGZB9S9DPFRKXN";
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const els = {
@@ -102,6 +114,8 @@
       sendLinkBtn: document.getElementById("sendLinkBtn"),
       welcomeTitle: document.getElementById("welcomeTitle"),
       statusTop: document.getElementById("statusTop"),
+      typeformMount: document.getElementById("typeformMount"),
+      typeformHint: document.getElementById("typeformHint"),
     };
 
     function show(el){ el.classList.remove("hidden"); }
@@ -113,6 +127,42 @@
       const local = email.includes("@") ? email.split("@")[0] : email;
       const metaName = user?.user_metadata?.name;
       return (metaName && String(metaName).trim()) || local || "there";
+    }
+
+    function ensureTypeformScript() {
+      if (document.getElementById("typeform-embed-js")) return;
+
+      const s = document.createElement("script");
+      s.id = "typeform-embed-js";
+      s.src = "https://embed.typeform.com/next/embed.js";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    function mountTypeform(userId) {
+      // Clean mount point (prevents duplicates on auth state change)
+      els.typeformMount.innerHTML = "";
+      els.typeformHint.textContent = "";
+
+      if (!TYPEFORM_LIVE_ID) {
+        els.typeformHint.textContent = "Typeform is not configured.";
+        return;
+      }
+
+      // Create the live embed div
+      const tf = document.createElement("div");
+      tf.setAttribute("data-tf-live", TYPEFORM_LIVE_ID);
+
+      // This is the critical part: pass hidden field user_id
+      // Typeform expects: data-tf-hidden="user_id=VALUE"
+      tf.setAttribute("data-tf-hidden", `user_id=${encodeURIComponent(userId)}`);
+
+      els.typeformMount.appendChild(tf);
+
+      ensureTypeformScript();
+
+      // Optional UX hint (you can remove if you want)
+      els.typeformHint.textContent = "Your responses will be linked to this account.";
     }
 
     async function exchangeCodeIfPresent() {
@@ -137,6 +187,8 @@
 
       if (!session?.user) {
         // Logged out
+        els.typeformMount.innerHTML = "";
+        els.typeformHint.textContent = "";
         hide(els.loggedIn);
         hide(els.logoutBtn);
         show(els.loggedOut);
@@ -149,10 +201,15 @@
       hide(els.loggedOut);
       show(els.loggedIn);
       show(els.logoutBtn);
+
+      // Mount Typeform with Supabase user id
+      mountTypeform(session.user.id);
     }
 
     async function hardResetToLoggedOut() {
       // Make UI deterministic even if Safari caches something odd
+      els.typeformMount.innerHTML = "";
+      els.typeformHint.textContent = "";
       hide(els.loggedIn);
       hide(els.logoutBtn);
       show(els.loggedOut);
