@@ -38,8 +38,9 @@
       padding:16px;
       background:#fff;
     }
+    .stack{display:flex; flex-direction:column; gap:12px;}
     h1{margin:0 0 10px; font-size:26px; letter-spacing:-0.02em; line-height:1.2;}
-    h2{margin:18px 0 8px; font-size:16px; letter-spacing:-0.01em;}
+    h2{margin:0 0 8px; font-size:16px; letter-spacing:-0.01em;}
     p{margin:0 0 12px; color:var(--muted);}
     label{display:block; margin:0 0 6px; color:var(--muted); font-size:14px;}
     input{
@@ -49,29 +50,13 @@
     .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     .meta{margin:8px 0 14px; font-size:13px; color:var(--muted);}
     .hidden{display:none;}
-
-    .divider{height:1px; background:var(--border); margin:16px 0;}
-    .placeholder{
-      border:1px dashed var(--border);
-      border-radius:12px;
-      padding:12px;
-      color:var(--muted);
-      background:#fafbfc;
-    }
-
-    /* Typeform iframe */
-    .tfWrap{
-      border:1px solid var(--border);
-      border-radius:12px;
-      overflow:hidden;
-      background:#fff;
-    }
-    .tfFrame{
-      width:100%;
-      height:72vh;
-      min-height:520px;
-      border:0;
-      display:block;
+    .embedWrap{border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff;}
+    iframe{display:block; width:100%; height:720px; border:0;}
+    .divider{height:1px; background:var(--border); margin:10px 0;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border:1px solid var(--border); border-radius:999px;
+      font-size:13px; color:var(--muted);
     }
   </style>
 </head>
@@ -85,7 +70,7 @@
 
     <div id="statusTop" class="meta"></div>
 
-    <!-- SAFE DEFAULT: logged-out view is visible by default -->
+    <!-- Logged-out view -->
     <section id="loggedOut" class="card">
       <h1>Sign in</h1>
       <p>Enter your email — we’ll send a magic link.</p>
@@ -98,42 +83,41 @@
       </div>
     </section>
 
-    <!-- Logged in view -->
-    <section id="loggedIn" class="card hidden">
-      <h1 id="welcomeTitle">Welcome</h1>
-      <p id="welcomeSub">This is your Nilea space.</p>
+    <!-- Logged-in view -->
+    <section id="loggedIn" class="hidden">
+      <div class="stack">
 
-      <!-- Primary action -->
-      <div class="row">
-        <button id="intakeBtn" class="btn btnPrimary" type="button">Start check</button>
-      </div>
+        <section class="card">
+          <h1 id="welcomeTitle">Welcome</h1>
+          <p id="welcomeSub">This is your Nilea space.</p>
 
-      <!-- After completed intake -->
-      <div id="intakeStatus" class="meta"></div>
+          <div class="row">
+            <button id="openIntakeBtn" class="btn btnPrimary" type="button">Start intake</button>
+            <button id="closeIntakeBtn" class="btn hidden" type="button">Close</button>
+          </div>
 
-      <div id="postIntakeArea" class="hidden">
-        <div class="divider"></div>
+          <div class="divider"></div>
 
-        <h2>Subscriber cards</h2>
-        <div class="placeholder">Cards will appear here once we build the next layer.</div>
+          <div id="intakeState" class="pill hidden"></div>
+          <div id="intakeHint" class="meta"></div>
+        </section>
 
-        <h2>Messages</h2>
-        <div class="placeholder">Later: paste messages here to attach them to a person.</div>
-      </div>
+        <!-- Embedded Typeform (hidden by default; opened by button) -->
+        <section id="embedSection" class="embedWrap hidden">
+          <iframe id="typeformFrame" title="Nilea intake"></iframe>
+        </section>
 
-      <!-- Embedded Typeform (hidden until user clicks) -->
-      <div id="embedArea" class="hidden">
-        <div class="divider"></div>
-        <h2>Quick check</h2>
-        <p class="meta" style="margin-top:0">Answer a few questions. You can come back and add more anytime.</p>
+        <!-- Placeholders -->
+        <section class="card">
+          <h2>Subscriber cards</h2>
+          <p class="meta">Placeholder — cards will appear here after intake processing.</p>
+        </section>
 
-        <div class="tfWrap">
-          <iframe id="tfFrame" class="tfFrame" title="Nilea intake"></iframe>
-        </div>
+        <section class="card">
+          <h2>Paste DMs</h2>
+          <p class="meta">Placeholder — DM intake will live here in a later build.</p>
+        </section>
 
-        <div class="row">
-          <button id="closeEmbedBtn" class="btn" type="button">Close</button>
-        </div>
       </div>
     </section>
 
@@ -147,15 +131,13 @@
 
     // ✅ Replace these:
     const SUPABASE_URL = "https://zcpwbllgsgeoenwarqop.supabase.co/";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzgxOTQyOSwiZXhwIjoyMDgzMzk1NDI5fQ.woEPnBvD9rvXI71-TwSB2i0_JcWS_JgETwL20EhIBnw";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcHdibGxnc2dlb2Vud2FycW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4MTk0MjksImV4cCI6MjA4MzM5NTQyOX0.aPZRvUOAy4fDUKHj79GqBmo_wvlQBv0p2it9gff6xdA";
+
+    // ✅ Replace with your Typeform embed URL (the one Typeform gives you).
+    // It must support passing hidden fields via query string: ?user_id=<uid>
+    const TYPEFORM_EMBED_URL = "https://form.typeform.com/to/hiAkhwEE#user_id=xxxxx";
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // ✅ Typeform form id (your existing one)
-    const TYPEFORM_FORM_ID = "hiAkhwEE";
-
-    // ✅ Redirect back here from Typeform ending button:
-    // Set in Typeform Ending: https://nilea.io/app/?intake=done
-    const INTAKE_DONE_PARAM = "intake"; // intake=done
 
     const els = {
       loggedOut: document.getElementById("loggedOut"),
@@ -167,13 +149,13 @@
       welcomeSub: document.getElementById("welcomeSub"),
       statusTop: document.getElementById("statusTop"),
 
-      intakeBtn: document.getElementById("intakeBtn"),
-      intakeStatus: document.getElementById("intakeStatus"),
-      postIntakeArea: document.getElementById("postIntakeArea"),
+      openIntakeBtn: document.getElementById("openIntakeBtn"),
+      closeIntakeBtn: document.getElementById("closeIntakeBtn"),
+      embedSection: document.getElementById("embedSection"),
+      typeformFrame: document.getElementById("typeformFrame"),
 
-      embedArea: document.getElementById("embedArea"),
-      tfFrame: document.getElementById("tfFrame"),
-      closeEmbedBtn: document.getElementById("closeEmbedBtn"),
+      intakeState: document.getElementById("intakeState"),
+      intakeHint: document.getElementById("intakeHint"),
     };
 
     function show(el){ el.classList.remove("hidden"); }
@@ -194,6 +176,7 @@
 
       const { error } = await supabase.auth.exchangeCodeForSession(code);
 
+      // Clean URL to avoid re-exchange on refresh
       url.searchParams.delete("code");
       window.history.replaceState({}, document.title, url.toString());
 
@@ -203,122 +186,96 @@
       }
     }
 
-    async function getLatestSubmission(userId) {
-      // intake_submissions: user_id, typeform_response_id, submitted_at, payload
-      const { data, error } = await supabase
-        .from("intake_submissions")
-        .select("typeform_response_id, submitted_at")
-        .eq("user_id", userId)
-        .order("submitted_at", { ascending: false })
-        .limit(1);
-
-      if (error) {
-        console.error("getLatestSubmission error", error);
-        return null;
-      }
-      return (data && data[0]) ? data[0] : null;
-    }
-
-    function openEmbedWithUser(userId) {
-      // Hidden fields in Typeform: user_id=<uuid>
-      const src = `https://form.typeform.com/to/${TYPEFORM_FORM_ID}?user_id=${encodeURIComponent(userId)}&typeform-medium=embed-snippet`;
-      els.tfFrame.src = src;
-      show(els.embedArea);
-      // keep focus: scroll to embed
-      els.embedArea.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function closeEmbed() {
-      hide(els.embedArea);
-      // optional: stop loading / free memory
-      els.tfFrame.src = "about:blank";
-    }
-
-    function setIntakeUI({ hasCompleted }) {
-      if (hasCompleted) {
-        els.intakeBtn.textContent = "Add more";
-        els.intakeStatus.textContent = "Saved. You can add more names anytime.";
-        show(els.postIntakeArea);
-      } else {
-        els.intakeBtn.textContent = "Start check";
-        els.intakeStatus.textContent = "";
-        hide(els.postIntakeArea);
-      }
-    }
-
-    async function reconcileAfterRedirectIfNeeded(userId) {
-      // If user came back from Typeform ending: /app/?intake=done
-      const url = new URL(window.location.href);
-      const intakeDone = url.searchParams.get(INTAKE_DONE_PARAM) === "done";
-      if (!intakeDone) return;
-
-      // Remove param to avoid repeated behavior on refresh
-      url.searchParams.delete(INTAKE_DONE_PARAM);
-      window.history.replaceState({}, document.title, url.toString());
-
-      // Webhook insert may be slightly delayed — poll briefly.
-      els.intakeStatus.textContent = "Saving…";
-      for (let i = 0; i < 6; i++) {
-        const latest = await getLatestSubmission(userId);
-        if (latest?.typeform_response_id) {
-          setIntakeUI({ hasCompleted: true });
-          return;
-        }
-        await new Promise(r => setTimeout(r, 700));
-      }
-      // If still not present, we just fall back to normal check later.
-      els.intakeStatus.textContent = "Saved. (If you don’t see updates yet, refresh once.)";
-    }
-
-        async function render() {
-      // 1) validate session (kills stale cached session)
-      const { data: userData, error: userErr } = await supabase.auth.getUser();
-      if (userErr || !userData?.user) {
-        // session is missing/invalid
-        hide(els.loggedIn);
-        hide(els.logoutBtn);
-        show(els.loggedOut);
-        return;
-      }
-    
-      // 2) show logged-in view
-      const name = usernameFromUser(userData.user);
-      els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
-      hide(els.loggedOut);
-      show(els.loggedIn);
-      show(els.logoutBtn);
-    }
-
-      const user = session.user;
-      const name = usernameFromUser(user);
-      const userId = user.id;
-
-      els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
-      els.welcomeSub.textContent = "This is your private workspace.";
-      hide(els.loggedOut);
-      show(els.loggedIn);
-      show(els.logoutBtn);
-
-      // Determine completed vs not completed based on presence of a submission
-      const latest = await getLatestSubmission(userId);
-      const hasCompleted = !!latest?.typeform_response_id;
-      setIntakeUI({ hasCompleted });
-
-      // If we returned from Typeform ending, reconcile (poll for insert)
-      await reconcileAfterRedirectIfNeeded(userId);
-
-      // Wire button each render (idempotent)
-      els.intakeBtn.onclick = () => openEmbedWithUser(userId);
-    }
-
     async function hardResetToLoggedOut() {
       hide(els.loggedIn);
       hide(els.logoutBtn);
       show(els.loggedOut);
+
+      // reset embed ui
+      hide(els.embedSection);
+      hide(els.closeIntakeBtn);
+      show(els.openIntakeBtn);
+      els.openIntakeBtn.disabled = false;
+      els.openIntakeBtn.textContent = "Start intake";
+      els.closeIntakeBtn.textContent = "Close";
+      els.typeformFrame.src = "about:blank";
+
+      hide(els.intakeState);
+      els.intakeState.textContent = "";
+      els.intakeHint.textContent = "";
+
       els.logoutBtn.disabled = false;
       els.logoutBtn.textContent = "Log out";
       setStatus("");
-      closeEmbed();
+    }
+
+    function buildTypeformUrl(userId) {
+      const base = TYPEFORM_EMBED_URL.trim();
+      if (!base) return "";
+      const hasQ = base.includes("?");
+      const sep = hasQ ? "&" : "?";
+      return `${base}${sep}user_id=${encodeURIComponent(userId)}`;
+    }
+
+    async function getIntakeCompleted(userId) {
+      // Requires RLS SELECT policy allowing user to read their own rows
+      // Table: intake_submissions, columns: user_id, created_at
+      const { data, error } = await supabase
+        .from("intake_submissions")
+        .select("id, created_at")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+      if (error) {
+        console.error("intake_submissions select error:", error);
+        // Fail closed: don't break UI
+        return { completed: false, lastCreatedAt: null };
+      }
+
+      const row = data?.[0] || null;
+      return { completed: !!row, lastCreatedAt: row?.created_at || null };
+    }
+
+    async function render() {
+      // ✅ IMPORTANT: validate session (kills stale cached session)
+      const { data: userData, error: userErr } = await supabase.auth.getUser();
+
+      if (userErr || !userData?.user) {
+        await hardResetToLoggedOut();
+        return;
+      }
+
+      const user = userData.user;
+      const name = usernameFromUser(user);
+
+      els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
+      els.welcomeSub.textContent = `You're signed in as ${user.email || ""}`.trim();
+
+      hide(els.loggedOut);
+      show(els.loggedIn);
+      show(els.logoutBtn);
+
+      // Button state based on "completed submission exists"
+      const { completed, lastCreatedAt } = await getIntakeCompleted(user.id);
+
+      show(els.intakeState);
+      if (!completed) {
+        els.intakeState.textContent = "Intake not submitted yet";
+        els.intakeHint.textContent = "When you finish the intake, refresh this page to see your updated status.";
+        els.openIntakeBtn.textContent = "Start intake";
+      } else {
+        els.intakeState.textContent = "Intake received";
+        els.intakeHint.textContent =
+          `Last submission: ${new Date(lastCreatedAt).toISOString().slice(0, 19).replace("T"," ")} UTC. Refresh after a new submission.`;
+        els.openIntakeBtn.textContent = "Add more";
+      }
+
+      // Keep embed closed by default after login/refresh
+      hide(els.embedSection);
+      hide(els.closeIntakeBtn);
+      show(els.openIntakeBtn);
+      els.typeformFrame.src = "about:blank";
     }
 
     // Send magic link
@@ -346,9 +303,39 @@
       setStatus("Check your email for the sign-in link.");
     });
 
-    // Close embed
-    els.closeEmbedBtn.addEventListener("click", () => {
-      closeEmbed();
+    // Open intake embed (in-cabinet)
+    els.openIntakeBtn.addEventListener("click", async () => {
+      setStatus("");
+      els.openIntakeBtn.disabled = true;
+      els.openIntakeBtn.textContent = "Opening…";
+
+      const { data: userData } = await supabase.auth.getUser();
+      const user = userData?.user;
+
+      if (!user) {
+        await hardResetToLoggedOut();
+        return;
+      }
+
+      const url = buildTypeformUrl(user.id);
+      if (!url) {
+        setStatus("Missing TYPEFORM_EMBED_URL in code.");
+        els.openIntakeBtn.disabled = false;
+        els.openIntakeBtn.textContent = "Start intake";
+        return;
+      }
+
+      els.typeformFrame.src = url;
+      show(els.embedSection);
+      show(els.closeIntakeBtn);
+      els.openIntakeBtn.disabled = false;
+      // Text stays as Start/Add more (set by render)
+    });
+
+    els.closeIntakeBtn.addEventListener("click", () => {
+      hide(els.embedSection);
+      hide(els.closeIntakeBtn);
+      els.typeformFrame.src = "about:blank";
     });
 
     // Logout (deterministic)
@@ -374,7 +361,7 @@
       }
     });
 
-    // Boot
+    // Boot with strong error handling: never allow "blank" state
     try {
       await exchangeCodeIfPresent();
       await render();
