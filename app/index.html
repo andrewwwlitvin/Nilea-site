@@ -270,15 +270,24 @@
       els.intakeStatus.textContent = "Saved. (If you don’t see updates yet, refresh once.)";
     }
 
-    async function render() {
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (!session?.user) {
+        async function render() {
+      // 1) validate session (kills stale cached session)
+      const { data: userData, error: userErr } = await supabase.auth.getUser();
+      if (userErr || !userData?.user) {
+        // session is missing/invalid
         hide(els.loggedIn);
         hide(els.logoutBtn);
         show(els.loggedOut);
         return;
       }
+    
+      // 2) show logged-in view
+      const name = usernameFromUser(userData.user);
+      els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
+      hide(els.loggedOut);
+      show(els.loggedIn);
+      show(els.logoutBtn);
+    }
 
       const user = session.user;
       const name = usernameFromUser(user);
