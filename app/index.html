@@ -215,9 +215,8 @@
 
       if (!hadAuthParams) return;
 
-      // Clean URL to avoid re-auth on refresh
-      url.searchParams.delete("code");
-      window.history.replaceState({}, document.title, `${url.origin}${url.pathname}${url.search}`);
+      // Clean URL to avoid re-auth on refresh (remove both query params and hash)
+      window.history.replaceState({}, document.title, url.pathname);
     }
 
     async function hardResetToLoggedOut() {
