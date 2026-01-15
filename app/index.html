@@ -284,10 +284,6 @@
       els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
       els.welcomeSub.textContent = `You're signed in as ${user.email || ""}`.trim();
 
-      hide(els.loggedOut);
-      show(els.loggedIn);
-      show(els.logoutBtn);
-
       // Button state based on "completed submission exists"
       const { completed, lastCreatedAt } = await getIntakeCompleted(user.id);
 
@@ -308,6 +304,11 @@
       hide(els.closeIntakeBtn);
       show(els.openIntakeBtn);
       els.typeformFrame.src = "about:blank";
+
+      // Show logged in view only after all data is loaded
+      hide(els.loggedOut);
+      show(els.loggedIn);
+      show(els.logoutBtn);
     }
 
     // Send magic link
