@@ -206,11 +206,9 @@
 
       if (hasHashAuth) {
         hadAuthParams = true;
-        const { error } = await supabase.auth.getSessionFromUrl({ storeSession: true });
-        if (error) {
-          console.error(error);
-          setStatus("Sign-in failed. Please try again.");
-        }
+        // Supabase JS v2 automatically handles hash-based auth on initialization
+        // Just wait a bit for the session to be established
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
       if (!hadAuthParams) return;
