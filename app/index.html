@@ -58,6 +58,16 @@
       padding:6px 10px; border:1px solid var(--border); border-radius:999px;
       font-size:13px; color:var(--muted);
     }
+    .loader{
+      display:flex; align-items:center; justify-content:center;
+      padding:60px 20px; text-align:center;
+    }
+    .spinner{
+      width:32px; height:32px; border:3px solid var(--border);
+      border-top-color:var(--accent); border-radius:50%;
+      animation:spin 0.8s linear infinite;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
   </style>
 </head>
 
@@ -69,6 +79,11 @@
     </div>
 
     <div id="statusTop" class="meta"></div>
+
+    <!-- Loading spinner -->
+    <div id="loader" class="loader">
+      <div class="spinner"></div>
+    </div>
 
     <!-- Logged-out view -->
     <section id="loggedOut" class="card hidden">
@@ -140,6 +155,7 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const els = {
+      loader: document.getElementById("loader"),
       loggedOut: document.getElementById("loggedOut"),
       loggedIn: document.getElementById("loggedIn"),
       logoutBtn: document.getElementById("logoutBtn"),
@@ -218,6 +234,7 @@
     }
 
     async function hardResetToLoggedOut() {
+      hide(els.loader);
       hide(els.loggedIn);
       hide(els.logoutBtn);
       show(els.loggedOut);
@@ -284,10 +301,27 @@
       els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
       els.welcomeSub.textContent = `You're signed in as ${user.email || ""}`.trim();
 
-      // Button state based on "completed submission exists"
+      // Set loading state for intake status
+      show(els.intakeState);
+      els.intakeState.textContent = "Loading...";
+      els.intakeHint.textContent = "";
+      setOpenIntakeLabel("Start intake");
+
+      // Keep embed closed by default after login/refresh
+      hide(els.embedSection);
+      hide(els.closeIntakeBtn);
+      show(els.openIntakeBtn);
+      els.typeformFrame.src = "about:blank";
+
+      // Show logged in view immediately with loading state
+      hide(els.loader);
+      hide(els.loggedOut);
+      show(els.loggedIn);
+      show(els.logoutBtn);
+
+      // Load data and update UI (async, won't block showing the view)
       const { completed, lastCreatedAt } = await getIntakeCompleted(user.id);
 
-      show(els.intakeState);
       if (!completed) {
         els.intakeState.textContent = "Intake not submitted yet";
         els.intakeHint.textContent = "When you finish the intake, refresh this page to see your updated status.";
@@ -298,17 +332,6 @@
           `Last submission: ${new Date(lastCreatedAt).toISOString().slice(0, 19).replace("T"," ")} UTC. Refresh after a new submission.`;
         setOpenIntakeLabel("Add more");
       }
-
-      // Keep embed closed by default after login/refresh
-      hide(els.embedSection);
-      hide(els.closeIntakeBtn);
-      show(els.openIntakeBtn);
-      els.typeformFrame.src = "about:blank";
-
-      // Show logged in view only after all data is loaded
-      hide(els.loggedOut);
-      show(els.loggedIn);
-      show(els.logoutBtn);
     }
 
     // Send magic link
