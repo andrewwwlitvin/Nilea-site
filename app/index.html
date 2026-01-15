@@ -301,12 +301,8 @@
       els.welcomeTitle.textContent = `Welcome to your Nilea, ${name}`;
       els.welcomeSub.textContent = `You're signed in as ${user.email || ""}`.trim();
 
-      // Set loading state for intake status
-      show(els.intakeState);
-      els.intakeState.textContent = "Loading...";
-      els.intakeHint.textContent = "";
-
-      // Hide intake button during loading to prevent flicker
+      // Hide intake status elements during loading to prevent flicker
+      hide(els.intakeState);
       hide(els.openIntakeBtn);
 
       // Keep embed closed by default after login/refresh
@@ -314,7 +310,7 @@
       hide(els.closeIntakeBtn);
       els.typeformFrame.src = "about:blank";
 
-      // Show logged in view immediately with loading state
+      // Show logged in view immediately
       hide(els.loader);
       hide(els.loggedOut);
       show(els.loggedIn);
@@ -334,7 +330,8 @@
         setOpenIntakeLabel("Add more");
       }
 
-      // Show intake button after data is loaded
+      // Show intake status and button after data is loaded with final values
+      show(els.intakeState);
       show(els.openIntakeBtn);
     }
 
