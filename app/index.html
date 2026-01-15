@@ -305,12 +305,13 @@
       show(els.intakeState);
       els.intakeState.textContent = "Loading...";
       els.intakeHint.textContent = "";
-      setOpenIntakeLabel("Start intake");
+
+      // Hide intake button during loading to prevent flicker
+      hide(els.openIntakeBtn);
 
       // Keep embed closed by default after login/refresh
       hide(els.embedSection);
       hide(els.closeIntakeBtn);
-      show(els.openIntakeBtn);
       els.typeformFrame.src = "about:blank";
 
       // Show logged in view immediately with loading state
@@ -332,6 +333,9 @@
           `Last submission: ${new Date(lastCreatedAt).toISOString().slice(0, 19).replace("T"," ")} UTC. Refresh after a new submission.`;
         setOpenIntakeLabel("Add more");
       }
+
+      // Show intake button after data is loaded
+      show(els.openIntakeBtn);
     }
 
     // Send magic link
