@@ -4,15 +4,8 @@
   <meta charset="UTF-8" />
   <title>Nilea</title>
   <script>
-    /* GitHub Pages SPA redirect — preserves path and query for React Router */
-    var l = window.location;
-    l.replace(
-      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-      '/demo/' +
-      '?p=' + encodeURIComponent(l.pathname.slice('/demo/'.length - 1) + l.search) +
-      '&demo=true' +
-      (l.hash ? '&h=' + encodeURIComponent(l.hash.slice(1)) : '')
-    );
+    /* GitHub Pages SPA redirect — sends all /demo/* requests back to /demo/index.html */
+    window.location.replace('/demo/' + window.location.search + window.location.hash);
   </script>
 </head>
 <body></body>
