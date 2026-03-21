@@ -1,73 +1,310 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TKD9NS7G');</script>
-  <!-- End Google Tag Manager -->
-  
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes — Nilea</title>
-  <meta name="description" content="Short notes explaining how we think about creators, risk, and awareness." />
+  <meta name="description" content="Writing from the Nilea team on creator economy, audience intelligence, and building in public." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://nilea.io/notes/" />
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Notes — Nilea" />
+  <meta property="og:description" content="Writing from the Nilea team on creator economy, audience intelligence, and building in public." />
+  <meta property="og:url" content="https://nilea.io/notes/" />
+  <meta property="og:image" content="https://nilea.io/og-image.png" />
+  <meta property="og:site_name" content="Nilea" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Notes — Nilea" />
+  <meta name="twitter:description" content="Writing from the Nilea team on creator economy, audience intelligence, and building in public." />
+  <meta name="twitter:image" content="https://nilea.io/og-image.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Nilea Notes",
+    "url": "https://nilea.io/notes/",
+    "description": "Writing from the Nilea team on creator economy, audience intelligence, and building in public.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nilea",
+      "url": "https://nilea.io/"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: #111318;
-      background: #fff;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        oklch(0.965 0.004 60);
+      --fg:        oklch(0.235 0.015 65);
+      --accent:    oklch(0.55 0.115 30);
+      --muted:     oklch(0.52 0.016 60);
+      --border:    oklch(0.91 0.005 60);
+      --card:      oklch(1 0 0);
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --max:       600px;
+      --pad-x:     28px;
     }
-    .wrap {
-      max-width: 720px;
-      margin: 48px auto;
-      padding: 0 18px;
+
+    html { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      padding: 24px var(--pad-x);
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 12px;
+    .nav-logo { font-family: var(--serif); font-size: 18px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--fg); text-decoration: none; display: inline-flex; align-items: flex-start; gap: 1px; }
+    .nav-logo-deg {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 1;
+      margin-top: 1px;
+      letter-spacing: 0;
     }
-    p {
-      color: #5a6372;
-      margin-bottom: 24px;
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-link { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-link:hover { color: var(--fg); }
+    .nav-link.active { color: var(--fg); font-weight: 500; }
+    .nav-signin {
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      color: var(--fg); border: 1px solid var(--border);
+      background: var(--card); padding: 7px 16px; border-radius: 100px;
+      text-decoration: none; transition: border-color 0.15s;
     }
-    ul {
-      list-style: none;
+    .nav-signin:hover { border-color: var(--muted); }
+
+    /* CONTENT */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-family: var(--serif); font-size: clamp(32px, 8vw, 44px);
+      font-weight: 700; line-height: 1.15; color: var(--fg);
+      margin-bottom: 20px;
+    }
+    .page-header p {
+      font-size: 16px; line-height: 1.7; color: var(--muted); max-width: 520px;
+    }
+
+    /* NOTES LIST */
+    .notes-list {
       padding: 0;
+      list-style: none;
     }
-    li {
+
+    .note-item {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .note-item:last-child { border-bottom: none; }
+
+    .note-meta {
+      font-size: 12px; color: var(--muted); letter-spacing: 0.04em;
       margin-bottom: 12px;
     }
-    a {
-      color: #2F6F6D;
-      text-decoration: none;
+    .note-title {
+      font-family: var(--serif); font-size: clamp(20px, 5vw, 26px);
+      font-weight: 700; line-height: 1.25; color: var(--fg);
+      margin-bottom: 14px;
     }
-    a:hover {
-      text-decoration: underline;
+    .note-title a {
+      color: inherit; text-decoration: none;
+      transition: color 0.15s;
+    }
+    .note-title a:hover { color: var(--accent); }
+
+    .note-excerpt {
+      font-size: 15px; line-height: 1.75; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .note-read {
+      font-size: 13px; font-weight: 500; color: var(--accent);
+      text-decoration: none; letter-spacing: 0.01em;
+      transition: opacity 0.15s;
+    }
+    .note-read:hover { opacity: 0.7; }
+
+    /* PLACEHOLDER NOTES — future */
+    .note-item.upcoming {
+      opacity: 0.45;
+    }
+    .note-item.upcoming .note-title a {
+      pointer-events: none; cursor: default;
+    }
+    .upcoming-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 2px 8px; margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px var(--pad-x);
+      max-width: var(--max);
+      margin: 80px auto 0;
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer-brand-name {
+      font-family: var(--sans); font-weight: 500; font-size: 13px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg);
+      margin-bottom: 6px;
+    }
+    .footer-brand-desc { font-size: 13px; color: var(--muted); }
+    .footer-cols { display: flex; gap: 32px; }
+    .footer-col h4 {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+      white-space: nowrap;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--fg); }
+    .footer-bottom { font-size: 12px; color: var(--muted); }
+
+    @media (min-width: 640px) {
+      :root { --pad-x: 48px; }
+      .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      .page-header { padding: 80px 0 56px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <h1>Notes</h1>
-    <p>
-      Short texts where we explain how we think about creators, risk, and awareness.
-    </p>
 
-    <ul>
-      <li>
-        <a href="https://nilea.io/notes/what-nilea-is.html">
-          What Nilea Is (and What It Isn’t)
-        </a>
+  <header>
+    <nav>
+      <a href="/" class="nav-logo">Nilea<span class="nav-logo-deg">&deg;</span></a>
+      <div class="nav-right">
+        <a class="nav-link active" href="/notes/">Notes</a>
+        <a class="nav-signin" href="/login">Sign in</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <header class="page-header">
+      <p class="label">Notes</p>
+      <h1>How we think.</h1>
+      <p>Short texts where we clarify how we think about creators, risk, and awareness. Not marketing. Not a blog. Just thinking, made visible.</p>
+    </header>
+
+    <ul class="notes-list">
+
+      <!-- Published note — newest first -->
+      <li class="note-item">
+        <p class="note-meta">March 2026</p>
+        <h2 class="note-title">
+          <a href="/notes/shape-of-an-idea">The Shape of an Idea</a>
+        </h2>
+        <p class="note-excerpt">
+          An idea, on its own, has no weight. It is a possibility, a question. To see if it holds, you have to give it a form. The distance between an idea and a product is bridged by a thousand small decisions, each one a statement of what you believe.
+        </p>
+        <a href="/notes/shape-of-an-idea" class="note-read">Read the full note →</a>
       </li>
+
+      <!-- First published note -->
+      <li class="note-item">
+        <p class="note-meta">January 2026</p>
+        <h2 class="note-title">
+          <a href="/notes/what-nilea-is">What Nilea Is (and What It Isn't)</a>
+        </h2>
+        <p class="note-excerpt">
+          Nilea started from a simple observation. For many creators, the hardest part of their work is not creating content. It is living with uncertainty — around who sees it, where it travels, and when it might surface in places that matter personally.
+        </p>
+        <a href="/notes/what-nilea-is" class="note-read">Read the full note →</a>
+      </li>
+
+      <!-- Upcoming notes — shown dimmed to signal more is coming -->
+      <li class="note-item upcoming">
+        <p class="note-meta">Coming <span class="upcoming-tag">Soon</span></p>
+        <h2 class="note-title">
+          <a href="#">Why We Don't Send Alerts</a>
+        </h2>
+        <p class="note-excerpt">
+          Most tools in this space are built around notifications. We made a deliberate choice not to be. Here is why.
+        </p>
+      </li>
+
+      <li class="note-item upcoming">
+        <p class="note-meta">Coming <span class="upcoming-tag">Soon</span></p>
+        <h2 class="note-title">
+          <a href="#">On Naming People in Your Audience</a>
+        </h2>
+        <p class="note-excerpt">
+          The act of putting a name to a pattern is not surveillance. It is clarity. There is a meaningful difference between the two.
+        </p>
+      </li>
+
     </ul>
+
   </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-brand-name">Nilea</p>
+        <p class="footer-brand-desc">A private workspace for understanding your audience.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Nilea</h4>
+          <ul>
+            <li><a href="/login">Sign in</a></li>
+            <li><a href="/notes/">Notes</a></li>
+            <li><a href="index.html#agencies">For agencies</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay in touch</h4>
+          <ul>
+            <li><a href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener">Get updates</a></li>
+            <li><a href="mailto:hq@nilea.io">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Nilea</p>
+  </footer>
+
 </body>
 </html>

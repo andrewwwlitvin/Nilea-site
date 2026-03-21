@@ -1,259 +1,764 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TKD9NS7G');</script>
-  <!-- End Google Tag Manager -->
-  
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Nilea — a mobile-first dashboard for monitoring subscriber-level risk and detected content leaks." />
-  <title>Nilea</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nilea — Know your audience before you have to react</title>
+  <meta name="description" content="Nilea helps creators understand their subscriber base through real interaction signals. Built for OnlyFans and Fansly creators who want clarity without noise." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://nilea.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nilea — Know your audience before you have to react" />
+  <meta property="og:description" content="Nilea helps creators understand their subscriber base through real interaction signals. Built for OnlyFans and Fansly creators who want clarity without noise." />
+  <meta property="og:url" content="https://nilea.io/" />
+  <meta property="og:image" content="https://nilea.io/og-image.png" />
+  <meta property="og:site_name" content="Nilea" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nilea — Know your audience before you have to react" />
+  <meta name="twitter:description" content="Nilea helps creators understand their subscriber base through real interaction signals. Built for OnlyFans and Fansly creators who want clarity without noise." />
+  <meta name="twitter:image" content="https://nilea.io/og-image.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Nilea",
+    "url": "https://nilea.io/",
+    "description": "Nilea helps creators understand their subscriber base through real interaction signals.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://nilea.io/notes/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    :root{
-      --bg: #ffffff;
-      --text: #111318;
-      --muted: #5a6372;
-      --border: #e7e9ee;
+    /* ─────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --bg:          oklch(0.965 0.004 60);
+      --fg:          oklch(0.235 0.015 65);
+      --card:        oklch(1 0 0);
+      --border:      oklch(0.91 0.005 60);
+      --muted:       oklch(0.52 0.016 60);
+      --accent:      oklch(0.55 0.115 30);
+      --accent-soft: oklch(0.94 0.018 30);
 
-      /* Calm accent (single color used for links + primary button) */
-      --accent: #2F6F6D;
-      --accent-hover: #265b59;
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
 
-      --max: 720px;
-      --radius: 14px;
+      /* Mobile-first spacing — generous by default */
+      --section-gap: 80px;
+      --inner-gap:   40px;
+      --pad-x:       28px;
+      --max-w:       600px;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
+    /* ─────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
       background: var(--bg);
-      color: var(--text);
-      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
+    * { overflow-wrap: break-word; word-break: break-word; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.7;
+      width: 100%;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent-hover); text-decoration: underline; }
-
+    /* ─────────────────────────────────────────
+       LAYOUT WRAPPER
+    ───────────────────────────────────────── */
     .wrap {
-      max-width: var(--max);
-      margin: 44px auto;
-      padding: 0 18px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
     }
 
-    @media (max-width: 420px) {
-      .wrap { margin: 28px auto; padding: 0 16px; }
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    nav {
+      padding: 24px var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      line-height: 1.6;
     }
-
-    .hero h1{
-      margin: 0 0 10px;
-      font-size: 34px;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--fg);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 1px;
     }
-    @media (max-width: 420px) {
-      .hero h1 { font-size: 30px; }
+    .nav-logo-deg {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 1;
+      margin-top: 1px;
+      letter-spacing: 0;
     }
-
-    .lead {
-      margin: 0 0 18px;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 14px;
       color: var(--muted);
-      font-size: 17px;
+      transition: color 0.15s;
+    }
+    .nav-link:hover { color: var(--fg); }
+    .nav-signin {
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 100px;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .nav-signin:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
     }
 
+    /* ─────────────────────────────────────────
+       HERO
+       One idea. Lots of air. Nothing competing.
+    ───────────────────────────────────────── */
+    .hero {
+      padding: 72px var(--pad-x) 80px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--fg);
+      margin-bottom: 28px;
+      max-width: 100%;
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 48px;
+      max-width: 380px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 15px 28px;
+      border-radius: 100px;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { opacity: 0.86; transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 15px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--fg); border-color: var(--fg); }
+    .hero-reassurance {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    /* ─────────────────────────────────────────
+       DIVIDER
+    ───────────────────────────────────────── */
     .divider {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 28px 0;
+      margin: 0;
     }
 
-    .card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      background: #fff;
+    /* ─────────────────────────────────────────
+       FRAMING QUOTE
+       Italic serif. Lots of vertical space.
+    ───────────────────────────────────────── */
+    .framing {
+      padding: var(--section-gap) var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .framing blockquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--fg);
+      border-left: 2px solid var(--accent-soft);
+      padding-left: 14px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
-    .h2 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
+    /* ─────────────────────────────────────────
+       WHAT NILEA DOES
+       Each card is full-width on mobile.
+    ───────────────────────────────────────── */
+    .what {
+      padding: var(--section-gap) var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
     }
-
-    .p {
-      margin: 0 0 12px;
-      color: var(--muted);
-    }
-
-    .ctaRow {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      text-decoration: none;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .btnPrimary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
-    }
-    .btnPrimary:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
-      text-decoration: none;
-    }
-
-    .btnSecondary:hover { text-decoration: none; border-color: #cfd5e1; }
-
-    .meta {
-      margin: 10px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 640px) {
-      .grid2 { grid-template-columns: 1fr; }
-    }
-
-    footer {
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footerLinks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 14px;
-      margin: 10px 0 0;
-    }
-
-    .kicker {
-      display: inline-block;
-      margin: 0 0 10px;
-      font-size: 13px;
-      letter-spacing: 0.08em;
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .what-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .what-card {
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+    }
+    .what-card h3 {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 20px;
+    }
+    .what-card li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+      padding: 7px 0;
+      padding-left: 18px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .what-card li:last-child { border-bottom: none; }
+    .does-card li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+    .doesnt-card li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* ─────────────────────────────────────────
+       SCREENSHOTS
+       Full-bleed strip. Each card is a window.
+    ───────────────────────────────────────── */
+    .screenshots-outer {
+      background: oklch(0.955 0.006 60);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: var(--section-gap) 0;
+      overflow: hidden;
+      contain: layout; /* prevent scroll-width leaking into page */
+    }
+    .screenshots-intro {
+      padding: 0 var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto 40px;
+    }
+    .screenshots-intro p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 10px;
+      max-width: 340px;
+    }
+    .screenshots-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 var(--pad-x) 4px;
+      scrollbar-width: none;
+    }
+    .screenshots-strip::-webkit-scrollbar { display: none; }
+    /* First card aligned to left edge of content */
+    .screenshots-strip::before {
+      content: '';
+      flex: 0 0 0px;
+    }
+    .screen-card {
+      flex: 0 0 240px;
+      scroll-snap-align: start;
+      background: var(--card);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px oklch(0.235 0.015 65 / 0.07);
+    }
+    .screen-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .screen-caption {
+      padding: 16px 18px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .screen-caption strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+    .screen-caption span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .try-link-wrap {
+      padding: 36px var(--pad-x) 0;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .try-link {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--accent-soft);
+      padding-bottom: 2px;
+      transition: gap 0.15s, border-color 0.15s;
+    }
+    .try-link:hover { gap: 12px; border-color: var(--accent); }
+
+    /* ─────────────────────────────────────────
+       NOTES
+       First-class. Serif title. Room to read.
+    ───────────────────────────────────────── */
+    .notes {
+      padding: var(--section-gap) var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .notes-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 10px;
+      margin-bottom: 40px;
+      max-width: 360px;
+    }
+    .note-card {
+      display: block;
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      transition: box-shadow 0.2s;
+    }
+    .note-card:hover {
+      box-shadow: 0 8px 28px oklch(0.235 0.015 65 / 0.08);
+    }
+    .note-date {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .note-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--fg);
+      margin-bottom: 20px;
+    }
+    .note-excerpt {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      border-left: 2px solid var(--accent-soft);
+      padding-left: 18px;
+      margin-bottom: 28px;
+    }
+    .note-read {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.15s;
+    }
+    .note-read:hover { gap: 10px; }
+    .notes-all-wrap {
+      margin-top: 24px;
+    }
+    .notes-all {
+      font-size: 14px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      display: inline-block;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .notes-all:hover { color: var(--fg); border-color: var(--fg); }
+
+    /* ─────────────────────────────────────────
+       AGENCIES
+    ───────────────────────────────────────── */
+    .agencies {
+      padding: 0 var(--pad-x) var(--section-gap);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .agencies-card {
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 36px 28px;
+    }
+    .agencies-card h2 {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+    .agencies-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      max-width: 360px;
+    }
+    .agencies-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: var(--inner-gap) var(--pad-x) 48px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-brand {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .footer-cols {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--fg); }
+    .footer-copy {
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────
+       DESKTOP — inherit from mobile, just wider
+    ───────────────────────────────────────── */
+    @media (min-width: 640px) {
+      :root {
+        --section-gap: 100px;
+        --pad-x: 48px;
+      }
+      .hero h1 { font-size: 48px; }
+      .hero-cta { flex-direction: row; align-items: center; }
+      .what-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .screen-card { flex: 0 0 260px; }
     }
   </style>
 </head>
-
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <span class="kicker">Nilea</span>
-      <h1>Nilea for creators — coming soon</h1>
-      <p class="lead">
-        A mobile-first dashboard for monitoring subscriber-level risk and detected content leaks.
-      </p>
-      <p class="p">
-        Nilea brings signals and findings into one place for review.
-        Data is based on creator-provided inputs, observable patterns, and periodic scans for leaked content.
-      </p>
 
-      <div class="ctaRow">
-        <a class="btn btnPrimary" href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener noreferrer">
-          Subscribe for updates
-        </a>
-        <a class="btn btnSecondary" href="#agencies">
-          Agencies
-        </a>
+  <!-- NAV -->
+  <header>
+    <nav>
+      <a href="/" class="nav-logo">Nilea<span class="nav-logo-deg">&deg;</span></a>
+      <div class="nav-right">
+        <a class="nav-link" href="/notes/">Notes</a>
+        <a class="nav-signin" href="/login">Sign in</a>
       </div>
-      <p class="meta">Occasional updates only. No spam.</p>
-    </section>
+    </nav>
+  </header>
 
-    <hr class="divider" />
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Private · Calm · Yours</p>
+    <h1>Know your audience<br>before you have to react.</h1>
+    <p class="hero-sub">
+      A private workspace where you can see patterns in how your subscribers
+      behave — calmly, on your own terms.
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="/login">Start exploring</a>
+      <a class="btn-ghost" href="#agencies">For agencies →</a>
+    </div>
+    <p class="hero-reassurance">No credit card. No setup. Just sign in.</p>
+  </section>
 
-    <section class="grid2">
-      <div class="card">
-        <h2 class="h2">What we’re learning</h2>
-        <p class="p">
-          Many creators don’t think about “leaks” as a legal problem.
-          They think about trust, uncertainty, and who in their audience might be risky.
-        </p>
-        <p class="p">
-          Our first focus is understanding risk within the subscriber base — before anything escalates.
-        </p>
+  <hr class="divider" />
+
+  <!-- FRAMING QUOTE -->
+  <section class="framing">
+    <blockquote>
+      "Creators decide when<br>
+      their inner circle gets to know.
+      Not content pirates."
+    </blockquote>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- WHAT NILEA DOES -->
+  <section class="what">
+    <p class="section-label">What Nilea helps you see</p>
+    <div class="what-cards">
+      <div class="what-card does-card">
+        <h3>What it does</h3>
+        <ul>
+          <li>Collects signals from your real interactions — especially DMs</li>
+          <li>Helps you group and recognise subscriber behaviour patterns</li>
+          <li>Shows where something may deserve your attention</li>
+          <li>Supports your decisions: monitor, set boundaries, ignore, or escalate</li>
+        </ul>
       </div>
-
-      <div class="card">
-        <h2 class="h2">Two simple lines we keep coming back to</h2>
-        <p class="p">“Being a creator doesn’t mean everyone gets to see your content.”</p>
-        <p class="p">“Creators decide when their inner circle gets to know — not content pirates.”</p>
+      <div class="what-card doesnt-card">
+        <h3>What it doesn't do</h3>
+        <ul>
+          <li>No automatic punishments or accusations</li>
+          <li>No fear-driven alerts</li>
+          <li>No surveillance or enforcement</li>
+          <li>Nilea never decides for you</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <hr class="divider" />
+  <!-- SCREENSHOTS -->
+  <div class="screenshots-outer">
+    <div class="screenshots-intro">
+      <p class="section-label">Inside Nilea</p>
+      <p>Real screens from the current prototype. Sign in and try it — no setup required.</p>
+    </div>
+    <div class="screenshots-strip">
+      <div class="screen-card">
+        <img src="screenshots/01_dashboard.png" alt="The Signals view — subscriber names sorted by signal weight" loading="lazy" />
+        <div class="screen-caption">
+          <strong>The Signals</strong>
+          <span>Names sorted by weight. Three-dot indicator coloured by tier.</span>
+        </div>
+      </div>
+      <div class="screen-card">
+        <img src="screenshots/02_name_drawer.png" alt="Name drawer — Jake's tags, observation note, and Check DMs" loading="lazy" />
+        <div class="screen-caption">
+          <strong>Name drawer</strong>
+          <span>Tags, your observation, and a direct path to check DMs.</span>
+        </div>
+      </div>
+      <div class="screen-card">
+        <img src="screenshots/03_check_dms.png" alt="Check DMs — paste text or upload a screenshot" loading="lazy" />
+        <div class="screen-caption">
+          <strong>Check DMs</strong>
+          <span>Paste a conversation or upload a screenshot.</span>
+        </div>
+      </div>
+      <div class="screen-card">
+        <img src="screenshots/04_vibe_check.png" alt="Vibe Check locked — add handle to unlock" loading="lazy" />
+        <div class="screen-caption">
+          <strong>Vibe Check</strong>
+          <span>Community insights unlock when you add a platform handle.</span>
+        </div>
+      </div>
+    </div>
+    <div class="try-link-wrap">
+      <a class="try-link" href="/login">Try the prototype yourself →</a>
+    </div>
+  </div>
 
-    <section>
-      <h2 class="h2">Follow</h2>
-      <p class="p">
-        X · Instagram · Telegram · LinkedIn (placeholders)
+  <!-- NOTES -->
+  <section class="notes">
+    <p class="section-label">Notes</p>
+    <p class="notes-desc">
+      Short texts where we clarify how we think about creators, risk, and awareness.
+      Not marketing. Not a blog. Just thinking, made visible.
+    </p>
+
+    <a class="note-card" href="/notes/shape-of-an-idea">
+      <p class="note-date">March 2026</p>
+      <h2 class="note-title">The Shape of an Idea</h2>
+      <p class="note-excerpt">
+        An idea, on its own, has no weight. It is a possibility, a question.
+        To see if it holds, you have to give it a form. The distance between
+        an idea and a product is bridged by a thousand small decisions, each
+        one a statement of what you believe.
       </p>
-    </section>
+      <span class="note-read">Read the full note →</span>
+    </a>
 
-    <hr class="divider" />
+    <div class="notes-all-wrap">
+      <a class="notes-all" href="/notes/">All notes →</a>
+    </div>
+  </section>
 
-    <section id="agencies" class="card">
-      <h2 class="h2">For agencies</h2>
-      <p class="p">
-        Inside agencies, leak-related risk scales with the roster.
-        When one creator is affected, the stress spreads across the team.
+  <hr class="divider" />
+
+  <!-- AGENCIES -->
+  <section class="agencies" id="agencies">
+    <div class="agencies-card">
+      <h2>For agencies</h2>
+      <p>
+        Inside agencies, risk scales with the roster. When one creator is
+        affected, the stress spreads across the team. We're talking to agencies
+        early — no pitch, just research.
       </p>
-      <div class="ctaRow">
-        <a class="btn btnPrimary" href="https://form.typeform.com/to/CQhAedgU" target="_blank" rel="noopener noreferrer">
-          Share your perspective (agency form)
-        </a>
-      </div>
-      <p class="meta">Early access research · No sales pitch</p>
-    </section>
+      <a class="btn-primary" href="https://form.typeform.com/to/CQhAedgU" target="_blank" rel="noopener noreferrer">
+        Share your perspective
+      </a>
+      <p class="agencies-note">Early access research · No sales pitch</p>
+    </div>
+  </section>
 
-    <footer>
-      <div><strong style="color: var(--text);">Nilea</strong></div>
-      <div class="footerLinks">
-        <a href="#">How to use Nilea</a>
-        <a href="#">Team behind Nilea</a>
-        <a href="https://nilea.io/notes/index.html">Notes</a>
-        <a href="#agencies">Agencies</a>
-        <a href="#">Become Affiliate partner</a>
-        <a href="#">Join our Influencers</a>
-        <a href="#">Ask for help</a>
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-brand">Nilea</p>
+    <p class="footer-tagline">A private workspace for understanding your audience.</p>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Nilea</h4>
+        <a href="/login">Sign in</a>
+        <a href="/notes/">Notes</a>
+        <a href="#agencies">For agencies</a>
+      </div>
+      <div class="footer-col">
+        <h4>Stay in touch</h4>
+        <a href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener noreferrer">Get updates</a>
         <a href="mailto:hq@nilea.io">Contact</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
       </div>
-    </footer>
-  </main>
+    </div>
+    <p class="footer-copy">© 2026 Nilea</p>
+  </footer>
+
 </body>
 </html>

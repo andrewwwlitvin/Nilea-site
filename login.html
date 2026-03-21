@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in — Nilea</title>
+  <meta name="description" content="Sign in to Nilea with your email. No password needed." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://nilea.io/login" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sign in — Nilea" />
+  <meta property="og:description" content="Sign in to Nilea with your email. No password needed." />
+  <meta property="og:url" content="https://nilea.io/login" />
+  <meta property="og:image" content="https://nilea.io/og-image.png" />
+  <meta property="og:site_name" content="Nilea" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sign in — Nilea" />
+  <meta name="twitter:description" content="Sign in to Nilea with your email. No password needed." />
+  <meta name="twitter:image" content="https://nilea.io/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        oklch(0.965 0.004 60);
+      --fg:        oklch(0.235 0.015 65);
+      --accent:    oklch(0.55 0.115 30);
+      --accent-h:  oklch(0.48 0.115 30);
+      --muted:     oklch(0.52 0.016 60);
+      --border:    oklch(0.91 0.005 60);
+      --border-f:  oklch(0.78 0.012 60);
+      --card:      oklch(1 0 0);
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --pad-x:     28px;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      padding: 24px var(--pad-x);
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif); font-size: 18px; font-weight: 700;
+      letter-spacing: 0; text-transform: none;
+      color: var(--fg); text-decoration: none;
+      display: inline-flex; align-items: flex-start; gap: 1px;
+    }
+    .nav-logo-deg {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 1;
+      margin-top: 1px;
+      letter-spacing: 0;
+    }
+    .nav-back {
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      padding: 7px 0;
+      border: 1px solid transparent;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--fg); }
+
+    /* MAIN — centred vertically on desktop, top-aligned on mobile */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px var(--pad-x) 80px;
+      width: 100%;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* HEADING */
+    .login-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 7vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: 12px;
+    }
+    .login-sub {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* FORM */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    input[type="email"] {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--fg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+    input[type="email"]::placeholder { color: var(--muted); opacity: 0.6; }
+    input[type="email"]:focus { border-color: var(--border-f); }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 100px;
+      padding: 15px 24px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 8px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: var(--accent-h); }
+
+    /* CONFIRMATION STATE — hidden by default */
+    .confirm-state {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding: 28px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-top: 8px;
+    }
+    .confirm-state.visible { display: flex; }
+    .confirm-icon {
+      width: 40px; height: 40px;
+      background: oklch(0.93 0.02 30);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .confirm-title {
+      font-family: var(--serif); font-size: 20px; font-weight: 700;
+      color: var(--fg); line-height: 1.3;
+    }
+    .confirm-body { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .confirm-email { color: var(--fg); font-weight: 500; }
+
+    /* DIVIDER */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .divider span { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+    /* DEMO LINK */
+    .demo-link {
+      display: block;
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fg);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 13px 24px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .demo-link:hover { border-color: var(--muted); }
+
+    /* FINE PRINT */
+    .fine-print {
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px var(--pad-x);
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: var(--sans); font-weight: 500; font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--fg); }
+
+    @media (min-width: 640px) {
+      :root { --pad-x: 48px; }
+      main {
+        align-items: center;
+        padding: 80px var(--pad-x);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="/" class="nav-logo">Nilea<span class="nav-logo-deg">&deg;</span></a>
+      <a href="/" class="nav-back">← Back</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-card">
+
+      <h1 class="login-heading">Your workspace<br>is waiting.</h1>
+      <p class="login-sub">Enter your email and we'll send you a sign-in link. No password needed.</p>
+
+      <!-- Sign-in form -->
+      <form id="login-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-primary">Send sign-in link</button>
+      </form>
+
+      <!-- Confirmation state — shown after submit -->
+      <div class="confirm-state" id="confirm-state">
+        <div class="confirm-icon">✉</div>
+        <p class="confirm-title">Check your inbox.</p>
+        <p class="confirm-body">
+          We've sent a sign-in link to <span class="confirm-email" id="confirm-email"></span>.
+          The link expires in 15 minutes. Check your spam folder if it doesn't arrive.
+        </p>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <a href="https://nileawork-r9kyjb63.manus.space/?demo=true" target="_blank" rel="noopener" class="demo-link">
+        Explore the demo workspace →
+      </a>
+
+      <p class="fine-print">
+        By signing in you agree that Nilea stores your email address to send you a magic link.
+        Nothing else is collected at this step.
+      </p>
+
+    </div>
+  </main>
+
+  <footer>
+    <a href="/" class="footer-logo">Nilea</a>
+    <div class="footer-links">
+      <a href="/notes/">Notes</a>
+      <a href="mailto:hq@nilea.io">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      document.getElementById('confirm-email').textContent = email;
+
+      // Hide the form, show confirmation
+      document.getElementById('login-form').style.display = 'none';
+      const confirmState = document.getElementById('confirm-state');
+      confirmState.classList.add('visible');
+
+      // In production: POST to /api/auth/magic-link with { email }
+      // For this prototype, we just show the confirmation state
+    }
+  </script>
+
+</body>
+</html>
