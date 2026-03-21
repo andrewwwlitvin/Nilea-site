@@ -376,6 +376,17 @@
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 8px 32px oklch(0.235 0.015 65 / 0.07);
+      position: relative;
+    }
+    .screen-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--card));
+      pointer-events: none;
     }
     .screen-card img {
       width: 100%;
