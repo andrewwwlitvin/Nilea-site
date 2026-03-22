@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Nilea</title>
+  <meta name="description" content="This page doesn't exist. You can return to Nilea from here." />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Page not found — Nilea" />
+  <meta property="og:description" content="This page doesn't exist. You can return to Nilea from here." />
+  <meta property="og:url" content="https://nilea.io/" />
+  <meta property="og:image" content="https://nilea.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:site_name" content="Nilea" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Page not found — Nilea" />
+  <meta name="twitter:description" content="This page doesn't exist. You can return to Nilea from here." />
+  <meta name="twitter:image" content="https://nilea.io/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        oklch(0.965 0.004 60);
+      --fg:        oklch(0.235 0.015 65);
+      --accent:    oklch(0.55 0.115 30);
+      --muted:     oklch(0.52 0.016 60);
+      --border:    oklch(0.91 0.005 60);
+      --card:      oklch(1 0 0);
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+      --pad-x:     28px;
+      --max:       600px;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    header {
+      width: 100%;
+    }
+    nav {
+      padding: 24px var(--pad-x);
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--fg);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 1px;
+    }
+    .nav-logo-deg {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 1;
+      margin-top: 1px;
+      letter-spacing: 0;
+    }
+    .nav-back {
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 0;
+      border: 1px solid transparent;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--fg); }
+
+    /* ─── MAIN ─── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 64px var(--pad-x) 80px;
+      width: 100%;
+    }
+
+    .not-found {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .not-found-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .not-found-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 7vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+
+    .not-found-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 340px;
+    }
+
+    .not-found-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--card);
+      background: var(--accent);
+      padding: 12px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.15s;
+      align-self: flex-start;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .not-found-secondary {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .not-found-secondary:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px var(--pad-x);
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .footer-brand-name {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+    .footer-brand-desc { font-size: 13px; color: var(--muted); }
+    .footer-cols { display: flex; gap: 32px; }
+    .footer-col h4 {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      white-space: nowrap;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--fg); }
+    .footer-bottom { font-size: 12px; color: var(--muted); }
+
+    @media (min-width: 640px) {
+      :root { --pad-x: 48px; }
+      .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+      main { padding-top: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav aria-label="Site navigation">
+      <a href="/" class="nav-logo">Nilea<span class="nav-logo-deg">&deg;</span></a>
+      <a href="/" class="nav-back">← Back</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="not-found">
+      <p class="not-found-label">404</p>
+      <h1 class="not-found-heading">This page<br>doesn't exist.</h1>
+      <p class="not-found-body">
+        The link may be broken, or the page may have moved.
+        Either way, you can find your way from here.
+      </p>
+      <div class="not-found-links">
+        <a href="/" class="btn-primary">Go to Nilea</a>
+        <a href="/notes/" class="not-found-secondary">Read the Notes →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-brand-name">Nilea</p>
+        <p class="footer-brand-desc">A private workspace for understanding your audience.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Nilea</h4>
+          <ul>
+            <li><a href="/login">Sign in</a></li>
+            <li><a href="/notes/">Notes</a></li>
+            <li><a href="https://form.typeform.com/to/CQhAedgU" target="_blank" rel="noopener noreferrer">For agencies</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay in touch</h4>
+          <ul>
+            <li><a href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener">Get updates</a></li>
+            <li><a href="mailto:hq@nilea.io">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Nilea</p>
+  </footer>
+
+</body>
+</html>
