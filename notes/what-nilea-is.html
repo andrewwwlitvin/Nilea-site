@@ -1,68 +1,91 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What Nilea Is (and What It Isn't) — Nilea Notes</title>
-  <meta name="description" content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://nilea.io/notes/what-nilea-is" />
-
-  <!-- Open Graph -->
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="What Nilea Is (and What It Isn't) — Nilea Notes" />
-  <meta property="og:description" content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." />
-  <meta property="og:url" content="https://nilea.io/notes/what-nilea-is" />
-  <meta property="og:image" content="https://nilea.io/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:logo" content="https://nilea.io/og-image.png" />
-  <meta property="og:site_name" content="Nilea" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@nilea_io" />
-  <meta name="twitter:title" content="What Nilea Is (and What It Isn't) — Nilea Notes" />
-  <meta name="twitter:description" content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." />
-  <meta name="twitter:image" content="https://nilea.io/og-image.png" />
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "What Nilea Is (and What It Isn't)",
-    "description": "Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions.",
-    "url": "https://nilea.io/notes/what-nilea-is",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Nilea",
-      "url": "https://nilea.io/"
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://nilea.io/notes/what-nilea-is"
-    }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>What Nilea Is (and What It Isn't) — Nilea Notes</title>
+<meta content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://nilea.io/notes/what-nilea-is" rel="canonical"/>
+<!-- Open Graph -->
+<meta content="en_US" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="What Nilea Is (and What It Isn't) — Nilea Notes" property="og:title"/>
+<meta content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." property="og:description"/>
+<meta content="https://nilea.io/notes/what-nilea-is" property="og:url"/>
+<meta content="https://nilea.io/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="https://nilea.io/og-image.png" property="og:logo"/>
+<meta content="Nilea" property="og:site_name"/>
+<!-- Twitter Card -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="@nilea_io" name="twitter:site"/>
+<meta content="What Nilea Is (and What It Isn't) — Nilea Notes" name="twitter:title"/>
+<meta content="Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions." name="twitter:description"/>
+<meta content="https://nilea.io/og-image.png" name="twitter:image"/>
+<!-- Structured Data -->
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Nilea Is (and What It Isn't)",
+  "description": "Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions.",
+  "url": "https://nilea.io/notes/what-nilea-is",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nilea",
+    "url": "https://nilea.io/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nilea.io/notes/what-nilea-is"
+  },
+  "datePublished": "2026-01-08",
+  "dateModified": "2026-03-22",
+  "author": {
+    "@type": "Organization",
+    "name": "Nilea HQ",
+    "url": "https://nilea.io/"
   }
-  </script>
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Font preloads — critical latin subsets fetched before stylesheet parses -->
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-        href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6z9mXgjU0.woff2" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-        href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDZbtPK_l2qI0s.woff2" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-        href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXt_A-X-oE0qsEw.woff2" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
+}</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://nilea.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Notes",
+      "item": "https://nilea.io/notes/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "What Nilea Is (and What It Isn't)",
+      "item": "https://nilea.io/notes/what-nilea-is"
+    }
+  ]
+}</script>
+<!-- Favicon -->
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Font preloads — critical latin subsets fetched before stylesheet parses -->
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6z9mXgjU0.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDZbtPK_l2qI0s.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXt_A-X-oE0qsEw.woff2" rel="preload" type="font/woff2"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -230,86 +253,65 @@
   </style>
 </head>
 <body>
-
-  <header>
-    <nav aria-label="Main navigation">
-      <a href="/" class="nav-logo">Nilea<span class="nav-logo-deg">&deg;</span></a>
-      <div class="nav-right">
-        <a class="nav-link" href="/notes/">Notes</a>
-        <a class="nav-signin" href="/login">Sign in</a>
-      </div>
-    </nav>
-  </header>
-
-  <div class="container">
-
-    <a href="/notes/" class="back-link">All notes</a>
-
-    <header class="article-header">
-      <p class="article-label">Notes</p>
-      <h1 class="article-title">What Nilea Is (and What It Isn't)</h1>
-      <p class="article-meta">January 2026</p>
-    </header>
-
-    <article class="article-body">
-
-      <p>Nilea started from a simple observation.</p>
-
-      <p>For many creators, the hardest part of their work is not creating content. It is living with uncertainty — around who sees it, where it travels, and when it might surface in places that matter personally.</p>
-
-      <p>Most existing tools enter this situation late. They respond after something has already happened, focusing on enforcement, takedowns, or volume.</p>
-
-      <p>Nilea looks earlier.</p>
-
-      <p>It is built around awareness: understanding risk before it becomes an incident, and understanding one's audience before reacting to it.</p>
-
-      <p class="pull">This does not mean preventing everything. It means seeing the situation more clearly, so decisions can be made deliberately — not under pressure.</p>
-
-      <p>Nilea is not a takedown service. It is not an enforcement platform. And it does not decide what should be removed, hidden, or blocked.</p>
-
-      <p>Instead, it brings signals and findings into one place for review — quietly, without urgency.</p>
-
-      <p>Being a creator should not mean losing control over when and how personal exposure happens.</p>
-
-      <p>Creators decide when their inner circle gets to know. Not content pirates. Not platforms. And not tools acting on their behalf.</p>
-
-      <p>This is what Nilea is exploring.</p>
-
-    </article>
-
-    <div class="next-note">
-      <span class="next-note-label">Next note</span>
-      <a href="/notes/shape-of-an-idea" class="next-note-title">The Shape of an Idea →</a>
-    </div>
-
-  </div>
-
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <p class="footer-brand-name">Nilea</p>
-        <p class="footer-brand-desc">A private workspace for understanding your audience.</p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Nilea</h4>
-          <ul>
-            <li><a href="/login">Sign in</a></li>
-            <li><a href="/notes/">Notes</a></li>
-            <li><a href="https://form.typeform.com/to/CQhAedgU" target="_blank" rel="noopener noreferrer">For agencies</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Stay in touch</h4>
-          <ul>
-            <li><a href="https://form.typeform.com/to/N1bg9Jig" target="_blank" rel="noopener">Get updates</a></li>
-            <li><a href="mailto:hq@nilea.io">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <p class="footer-bottom">© 2026 Nilea</p>
-  </footer>
-
+<header>
+<nav aria-label="Main navigation">
+<a class="nav-logo" href="/">Nilea<span class="nav-logo-deg">°</span></a>
+<div class="nav-right">
+<a class="nav-link" href="/notes/">Notes</a>
+<a class="nav-signin" href="/login">Sign in</a>
+</div>
+</nav>
+</header>
+<div class="container">
+<a class="back-link" href="/notes/">All notes</a>
+<header class="article-header">
+<p class="article-label">Notes</p>
+<h1 class="article-title">What Nilea Is (and What It Isn't)</h1>
+<p class="article-meta">January 2026</p>
+</header>
+<article class="article-body">
+<p>Nilea started from a simple observation.</p>
+<p>For many creators, the hardest part of their work is not creating content. It is living with uncertainty — around who sees it, where it travels, and when it might surface in places that matter personally.</p>
+<p>Most existing tools enter this situation late. They respond after something has already happened, focusing on enforcement, takedowns, or volume.</p>
+<p>Nilea looks earlier.</p>
+<p>It is built around awareness: understanding risk before it becomes an incident, and understanding one's audience before reacting to it.</p>
+<p class="pull">This does not mean preventing everything. It means seeing the situation more clearly, so decisions can be made deliberately — not under pressure.</p>
+<p>Nilea is not a takedown service. It is not an enforcement platform. And it does not decide what should be removed, hidden, or blocked.</p>
+<p>Instead, it brings signals and findings into one place for review — quietly, without urgency.</p>
+<p>Being a creator should not mean losing control over when and how personal exposure happens.</p>
+<p>Creators decide when their inner circle gets to know. Not content pirates. Not platforms. And not tools acting on their behalf.</p>
+<p>This is what Nilea is exploring.</p>
+</article>
+<div class="next-note">
+<span class="next-note-label">Next note</span>
+<a class="next-note-title" href="/notes/shape-of-an-idea">The Shape of an Idea →</a>
+</div>
+</div>
+<footer>
+<div class="footer-top">
+<div class="footer-brand">
+<p class="footer-brand-name">Nilea</p>
+<p class="footer-brand-desc">A private workspace for understanding your audience.</p>
+</div>
+<div class="footer-cols">
+<div class="footer-col">
+<h4>Nilea</h4>
+<ul>
+<li><a href="/login">Sign in</a></li>
+<li><a href="/notes/">Notes</a></li>
+<li><a href="https://form.typeform.com/to/CQhAedgU" rel="noopener noreferrer" target="_blank">For agencies</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Stay in touch</h4>
+<ul>
+<li><a href="https://form.typeform.com/to/N1bg9Jig" rel="noopener" target="_blank">Get updates</a></li>
+<li><a href="mailto:hq@nilea.io">Contact</a></li>
+</ul>
+</div>
+</div>
+</div>
+<p class="footer-bottom">© 2026 Nilea</p>
+</footer>
 </body>
 </html>
