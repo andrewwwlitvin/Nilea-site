@@ -195,13 +195,25 @@
       margin: 44px 0;
     }
 
-    /* NEXT NOTE */
+        /* NEXT NOTE */
     .next-note {
       border-top: 1px solid var(--border);
       padding: 40px 0;
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .next-note-item {
+      display: flex;
       flex-direction: column;
       gap: 8px;
+      max-width: 48%;
+    }
+    .next-note-item.right {
+      text-align: right;
+      align-items: flex-end;
     }
     .next-note-label {
       font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
@@ -284,8 +296,10 @@
 <p>This is what Nilea is exploring.</p>
 </article>
 <div class="next-note">
-<span class="next-note-label">Next note</span>
+<div class="next-note-item right">
+<span class="next-note-label">Next note →</span>
 <a class="next-note-title" href="/notes/shape-of-an-idea">The Shape of an Idea →</a>
+</div>
 </div>
 </div>
 <footer>
