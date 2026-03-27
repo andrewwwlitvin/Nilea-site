@@ -7,15 +7,15 @@
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root{
-      --bg:#fff; --text:#111318; --muted:#5a6372; --border:#e7e9ee;
-      --accent:#2F6F6D; --accentHover:#265b59;
-      --radius:14px;
-      --max:720px;
+      --bg:#F2EFE8; --text:#1A1714; --muted:#8C8680; --border:rgba(26,23,20,0.12);
+      --accent:#4A6C80; --accentHover:#3A5A6E;
+      --radius:7px;
+      --max:680px;
     }
     *{box-sizing:border-box}
     body{
       margin:0; background:var(--bg); color:var(--text);
-      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      font:16px/1.65 'DM Sans',system-ui,-apple-system,sans-serif;
       -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
     .wrap{max-width:var(--max); margin:44px auto; padding:0 18px;}
@@ -25,8 +25,8 @@
     .brand{font-weight:600; letter-spacing:-0.01em;}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px; border-radius:12px; border:1px solid var(--border);
-      background:#fff; color:var(--text); cursor:pointer; text-decoration:none;
+      padding:10px 14px; border-radius:7px; border:1px solid var(--border);
+      background:var(--bg); color:var(--text); cursor:pointer; text-decoration:none;
     }
     .btnPrimary{border-color:var(--accent); background:var(--accent); color:#fff;}
     .btnPrimary:hover{background:var(--accentHover); border-color:var(--accentHover);}
@@ -36,7 +36,7 @@
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:16px;
-      background:#fff;
+      background:var(--bg);
     }
     .stack{display:flex; flex-direction:column; gap:12px;}
     h1{margin:0 0 10px; font-size:26px; letter-spacing:-0.02em; line-height:1.2;}
@@ -50,7 +50,7 @@
     .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
     .meta{margin:8px 0 14px; font-size:13px; color:var(--muted);}
     .hidden{display:none!important;}
-    .embedWrap{border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff;}
+    .embedWrap{border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:var(--bg);}
     iframe{display:block; width:100%; height:720px; border:0;}
     .divider{height:1px; background:var(--border); margin:10px 0;}
     .pill{
@@ -74,7 +74,7 @@
 <body>
   <main class="wrap">
     <div class="topbar">
-      <div class="brand">Nilea</div>
+      <div class="brand" style="font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:18px;color:#1A1714">Nilea<sup style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:9px;color:#4A6C80;vertical-align:super">°</sup></div>
       <button id="logoutBtn" class="btn hidden" type="button">Log out</button>
     </div>
 

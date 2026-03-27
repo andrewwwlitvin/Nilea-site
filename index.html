@@ -74,13 +74,13 @@
        TOKENS
     ───────────────────────────────────────── */
     :root {
-      --bg:          oklch(0.965 0.004 60);
-      --fg:          oklch(0.235 0.015 65);
-      --card:        oklch(1 0 0);
-      --border:      oklch(0.91 0.005 60);
-      --muted:       oklch(0.52 0.016 60);
-      --accent:      oklch(0.55 0.115 30);
-      --accent-soft: oklch(0.94 0.018 30);
+      --bg:          #F2EFE8;
+      --fg:          #1A1714;
+      --card:        #EAE6DC;
+      --border:      rgba(26,23,20,0.12);
+      --muted:       #8C8680;
+      --accent:      #4A6C80;
+      --accent-soft: rgba(74,108,128,0.12);
 
       --serif:  'Playfair Display', Georgia, serif;
       --sans:   'DM Sans', system-ui, sans-serif;
@@ -89,7 +89,7 @@
       --section-gap: 80px;
       --inner-gap:   40px;
       --pad-x:       28px;
-      --max-w:       600px;
+      --max-w:       680px;
     }
 
     /* ─────────────────────────────────────────
@@ -180,7 +180,7 @@
       color: var(--fg);
       border: 1px solid var(--border);
       padding: 7px 16px;
-      border-radius: 100px;
+      border-radius: 7px;
       transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
     .nav-signin:hover {
@@ -237,7 +237,7 @@
       font-size: 16px;
       font-weight: 500;
       padding: 15px 28px;
-      border-radius: 100px;
+      border-radius: 7px;
       transition: opacity 0.15s, transform 0.1s;
     }
     .btn-primary:hover { opacity: 0.86; transform: translateY(-1px); }
@@ -313,7 +313,7 @@
     }
     .what-card {
       background: var(--card);
-      border-radius: 20px;
+      border-radius: 7px;
       border: 1px solid var(--border);
       padding: 28px 24px;
     }
@@ -357,7 +357,7 @@
        Full-bleed strip. Each card is a window.
     ───────────────────────────────────────── */
     .screenshots-outer {
-      background: oklch(0.955 0.006 60);
+      background: #EAE6DC;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: var(--section-gap) 0;
@@ -395,10 +395,10 @@
       flex: 0 0 240px;
       scroll-snap-align: start;
       background: var(--card);
-      border-radius: 24px;
+      border-radius: 7px;
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: 0 8px 32px oklch(0.235 0.015 65 / 0.07);
+      box-shadow: 0 8px 32px rgba(26,23,20,0.07);
       position: relative;
     }
     .screen-card::after {
@@ -408,7 +408,7 @@
       right: 0;
       bottom: 0;
       height: 80px;
-      background: linear-gradient(to bottom, transparent, var(--card));
+      background: linear-gradient(to bottom, transparent, #EAE6DC);
       pointer-events: none;
     }
     .screen-card img {
@@ -478,13 +478,13 @@
     .note-card {
       display: block;
       background: var(--card);
-      border-radius: 20px;
+      border-radius: 7px;
       border: 1px solid var(--border);
       padding: 32px 28px;
       transition: box-shadow 0.2s;
     }
     .note-card:hover {
-      box-shadow: 0 8px 28px oklch(0.235 0.015 65 / 0.08);
+      box-shadow: 0 8px 28px rgba(26,23,20,0.08);
     }
     .note-date {
       font-size: 12px;
@@ -541,7 +541,7 @@
     }
     .agencies-card {
       background: var(--card);
-      border-radius: 20px;
+      border-radius: 7px;
       border: 1px solid var(--border);
       padding: 36px 28px;
     }
@@ -624,7 +624,7 @@
       :root {
         --section-gap: 100px;
         --pad-x: 48px;
-        --max-w: 600px;
+        --max-w: 680px;
       }
 
       /* Hero */
@@ -633,7 +633,7 @@
 
       /* What it does / doesn't — wider column + equal-height cards */
       .what {
-        max-width: 840px;
+        max-width: 960px;
       }
       .what-cards {
         display: grid;
@@ -647,7 +647,7 @@
 
       /* Screenshots — centred strip on wide viewports */
       .screenshots-intro {
-        max-width: 840px;
+        max-width: 960px;
       }
       .screenshots-strip {
         justify-content: center;
@@ -655,12 +655,12 @@
       }
       .screen-card { flex: 0 0 260px; }
       .try-link-wrap {
-        max-width: 840px;
+        max-width: 960px;
       }
 
       /* Agencies — two-column layout: text left, CTA right */
       .agencies {
-        max-width: 840px;
+        max-width: 960px;
       }
       .agencies-card {
         display: grid;

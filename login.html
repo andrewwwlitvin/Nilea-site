@@ -46,18 +46,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        oklch(0.965 0.004 60);
-      --fg:        oklch(0.235 0.015 65);
-      --accent:    oklch(0.55 0.115 30);
-      --accent-h:  oklch(0.48 0.115 30);
-      --muted:     oklch(0.52 0.016 60);
-      --border:    oklch(0.91 0.005 60);
-      --border-f:  oklch(0.78 0.012 60);
-      --card:      oklch(1 0 0);
+      --bg:        #F2EFE8;
+      --fg:        #1A1714;
+      --accent:    #4A6C80;
+      --accent-h:  #3A5A6E;
+      --muted:     #8C8680;
+      --border:    rgba(26,23,20,0.12);
+      --border-f:  rgba(26,23,20,0.25);
+      --card:      #EAE6DC;
       --serif:     'Playfair Display', Georgia, serif;
       --sans:      'DM Sans', system-ui, sans-serif;
       --pad-x:     28px;
-      --max:       600px;
+      --max:       680px;
     }
 
     html {
@@ -181,7 +181,7 @@
       color: #fff;
       background: var(--accent);
       border: none;
-      border-radius: 100px;
+      border-radius: 7px;
       padding: 15px 24px;
       cursor: pointer;
       transition: background 0.15s;
@@ -237,7 +237,7 @@
       color: var(--fg);
       background: transparent;
       border: 1px solid var(--border);
-      border-radius: 100px;
+      border-radius: 7px;
       padding: 13px 24px;
       cursor: pointer;
       transition: border-color 0.15s, color 0.15s;
