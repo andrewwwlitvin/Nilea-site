@@ -77,6 +77,8 @@
       --bg:          #F2EFE8;
       --fg:          #1A1714;
       --card:        #EAE6DC;
+      --surface2:    #C8C9A8;
+      --surface2-soft: rgba(200,201,168,0.25);
       --border:      rgba(26,23,20,0.12);
       --muted:       #8C8680;
       --accent:      #4A6C80;
@@ -275,6 +277,9 @@
       margin: 0 auto;
     }
     .framing blockquote {
+      background: rgba(200,201,168,0.3);
+      border-radius: 7px;
+      padding: 24px 28px;
       font-family: var(--serif);
       font-style: italic;
       font-size: 15px;
@@ -357,7 +362,7 @@
        Full-bleed strip. Each card is a window.
     ───────────────────────────────────────── */
     .screenshots-outer {
-      background: #EAE6DC;
+      background: #C8C9A8;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: var(--section-gap) 0;
@@ -408,7 +413,7 @@
       right: 0;
       bottom: 0;
       height: 80px;
-      background: linear-gradient(to bottom, transparent, #EAE6DC);
+      background: linear-gradient(to bottom, transparent, #C8C9A8);
       pointer-events: none;
     }
     .screen-card img {
