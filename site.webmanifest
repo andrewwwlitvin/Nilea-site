@@ -1,0 +1,21 @@
+{
+  "name": "Nilea",
+  "short_name": "Nilea",
+  "description": "Know your audience before you have to react.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2EFE8",
+  "theme_color": "#F2EFE8",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
