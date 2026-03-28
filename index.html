@@ -40,7 +40,40 @@
       "query-input": "required name=search_term_string"
     }
   }
-  </script><script type="application/ld+json">{
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Nilea?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nilea is a private workspace for creators to understand their subscriber base through real interaction signals. It helps identify behavioral patterns and manage subscriber-level risk without noise or fear-driven alerts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Nilea help with creator safety?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nilea provides proactive creator safety by helping you recognize patterns in subscriber behavior, such as obsessive fan warning signs, allowing you to set boundaries or take action on your own terms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Nilea automate subscriber management?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, Nilea does not automate punishments or accusations. It is a tool for awareness and decision support, ensuring you remain in control of your audience interactions."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Nilea",
@@ -542,6 +575,31 @@
     .notes-all:hover { color: var(--fg); border-color: var(--fg); }
 
     /* ─────────────────────────────────────────
+       FAQ
+    ───────────────────────────────────────── */
+    .faq {
+      padding: var(--section-gap) var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .faq-item {
+      margin-bottom: 32px;
+    }
+    .faq-item h3 {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ─────────────────────────────────────────
        AGENCIES
     ───────────────────────────────────────── */
     .agencies {
@@ -848,9 +906,32 @@
 <a class="notes-all" href="/notes/">All notes →</a>
 </div>
 </section>
-<hr class="divider"/>
-<!-- AGENCIES -->
-<section class="agencies" id="agencies">
+	<hr class="divider"/>
+	<!-- FAQ -->
+	<section class="faq">
+	<h2 class="section-label">Common Questions</h2>
+	<div class="faq-item">
+	<h3>What is Nilea?</h3>
+	<p>
+	        Nilea is a private workspace for creators to understand their subscriber base through real interaction signals. It helps identify behavioral patterns and manage subscriber-level risk without noise or fear-driven alerts.
+	      </p>
+	</div>
+	<div class="faq-item">
+	<h3>How does Nilea help with creator safety?</h3>
+	<p>
+	        Nilea provides proactive creator safety by helping you recognize patterns in subscriber behavior, such as obsessive fan warning signs, allowing you to set boundaries or take action on your own terms.
+	      </p>
+	</div>
+	<div class="faq-item">
+	<h3>Does Nilea automate subscriber management?</h3>
+	<p>
+	        No, Nilea does not automate punishments or accusations. It is a tool for awareness and decision support, ensuring you remain in control of your audience interactions.
+	      </p>
+	</div>
+	</section>
+	<hr class="divider"/>
+	<!-- AGENCIES -->
+	<section class="agencies" id="agencies">
 <div class="agencies-card">
 <h2>For agencies</h2>
 <p>
