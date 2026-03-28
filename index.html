@@ -422,21 +422,22 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 0 var(--pad-x) 4px;
+      padding: 0 var(--pad-x) 20px;
+      scroll-padding-left: var(--pad-x);
       scrollbar-width: none;
     }
     .screenshots-strip::-webkit-scrollbar { display: none; }
-    /* First card — breathing room from screen edge on mobile */
+    /* First card — left inset matches pad-x so it aligns with page content */
     .screenshots-strip::before {
       content: '';
-      flex: 0 0 6px;
+      flex: 0 0 var(--pad-x);
     }
     .screen-card {
       flex: 0 0 240px;
       scroll-snap-align: start;
       background: var(--card);
       border-radius: 7px;
-      overflow: hidden;
+      /* overflow removed — was clipping box-shadow at card boundary */
       border: 1px solid var(--border);
       box-shadow: 0 8px 32px rgba(26,23,20,0.07);
       position: relative;
@@ -457,6 +458,8 @@
       object-fit: cover;
       object-position: top;
       display: block;
+      border-radius: 7px 7px 0 0;
+      overflow: hidden;
     }
     .screen-card--bottom img {
       object-position: center 90%;
