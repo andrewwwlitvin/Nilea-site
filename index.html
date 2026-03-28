@@ -426,10 +426,10 @@
       scrollbar-width: none;
     }
     .screenshots-strip::-webkit-scrollbar { display: none; }
-    /* First card aligned to left edge of content */
+    /* First card — breathing room from screen edge on mobile */
     .screenshots-strip::before {
       content: '';
-      flex: 0 0 0px;
+      flex: 0 0 6px;
     }
     .screen-card {
       flex: 0 0 240px;
@@ -447,7 +447,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 80px;
+      height: 40px;
       background: linear-gradient(to bottom, transparent, #C8C9A8);
       pointer-events: none;
     }
@@ -462,7 +462,7 @@
       object-position: center 90%;
     }
     .screen-card--bottom2 img {
-      object-position: center 73%;
+      object-position: center 50%;
     }
     .screen-caption {
       padding: 16px 18px 20px;
