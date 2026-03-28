@@ -400,9 +400,9 @@
       background: #C8C9A8;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: var(--section-gap) 0;
-      overflow: hidden;
-      contain: layout; /* prevent scroll-width leaking into page */
+      padding: var(--section-gap) 0 calc(var(--section-gap) + 16px);
+      overflow-x: hidden; /* only clip horizontal — let box-shadow breathe vertically */
+      contain: style; /* relaxed from layout to allow shadow overflow */
     }
     .screenshots-intro {
       padding: 0 var(--pad-x);
