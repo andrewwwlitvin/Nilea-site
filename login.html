@@ -57,7 +57,7 @@
       --serif:     'Playfair Display', Georgia, serif;
       --sans:      'DM Sans', system-ui, sans-serif;
       --pad-x:     28px;
-      --max:       680px;
+      --max-w:     680px;
     }
 
     html {
@@ -79,11 +79,12 @@
     /* NAV */
     nav {
       padding: 24px var(--pad-x);
-      max-width: 600px;
+      max-width: var(--max-w);
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
     }
     .nav-logo {
       font-family: var(--serif); font-size: 18px; font-weight: 700;
@@ -119,6 +120,8 @@
       justify-content: center;
       padding: 48px var(--pad-x) 80px;
       width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
     }
 
     .login-card {
@@ -260,8 +263,9 @@
     footer {
       border-top: 1px solid var(--border);
       padding: 48px var(--pad-x);
-      max-width: var(--max);
+      max-width: var(--max-w);
       margin: 80px auto 0;
+      width: 100%;
     }
     .footer-top {
       display: flex;
