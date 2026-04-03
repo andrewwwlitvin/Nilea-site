@@ -40,40 +40,7 @@
       "query-input": "required name=search_term_string"
     }
   }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Nilea?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nilea is a private workspace for creators to understand their subscriber base through real interaction signals. It helps identify behavioral patterns and manage subscriber-level risk without noise or fear-driven alerts."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does Nilea help with creator safety?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nilea provides proactive creator safety by helping you recognize patterns in subscriber behavior, such as obsessive fan warning signs, allowing you to set boundaries or take action on your own terms."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Nilea automate subscriber management?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No, Nilea does not automate punishments or accusations. It is a tool for awareness and decision support, ensuring you remain in control of your audience interactions."
-        }
-      }
-    ]
-  }
-  </script>
-  <script type="application/ld+json">{
+  </script><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Nilea",
@@ -91,8 +58,6 @@
   ]
 }</script>
 <!-- Favicon -->
-<link rel="manifest" href="/site.webmanifest"/>
-<meta content="#F2EFE8" name="theme-color"/>
 <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
@@ -109,15 +74,13 @@
        TOKENS
     ───────────────────────────────────────── */
     :root {
-      --bg:          #F2EFE8;
-      --fg:          #1A1714;
-      --card:        #EAE6DC;
-      --surface2:    #C8C9A8;
-      --surface2-soft: rgba(200,201,168,0.25);
-      --border:      rgba(26,23,20,0.12);
-      --muted:       #8C8680;
-      --accent:      #4A6C80;
-      --accent-soft: rgba(74,108,128,0.12);
+      --bg:          oklch(0.965 0.004 60);
+      --fg:          oklch(0.235 0.015 65);
+      --card:        oklch(1 0 0);
+      --border:      oklch(0.91 0.005 60);
+      --muted:       oklch(0.52 0.016 60);
+      --accent:      oklch(0.55 0.115 30);
+      --accent-soft: oklch(0.94 0.018 30);
 
       --serif:  'Playfair Display', Georgia, serif;
       --sans:   'DM Sans', system-ui, sans-serif;
@@ -126,7 +89,7 @@
       --section-gap: 80px;
       --inner-gap:   40px;
       --pad-x:       28px;
-      --max-w:       680px;
+      --max-w:       600px;
     }
 
     /* ─────────────────────────────────────────
@@ -217,7 +180,7 @@
       color: var(--fg);
       border: 1px solid var(--border);
       padding: 7px 16px;
-      border-radius: 7px;
+      border-radius: 100px;
       transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
     .nav-signin:hover {
@@ -274,7 +237,7 @@
       font-size: 16px;
       font-weight: 500;
       padding: 15px 28px;
-      border-radius: 7px;
+      border-radius: 100px;
       transition: opacity 0.15s, transform 0.1s;
     }
     .btn-primary:hover { opacity: 0.86; transform: translateY(-1px); }
@@ -312,9 +275,6 @@
       margin: 0 auto;
     }
     .framing blockquote {
-      background: rgba(200,201,168,0.3);
-      border-radius: 7px;
-      padding: 24px 28px;
       font-family: var(--serif);
       font-style: italic;
       font-size: 15px;
@@ -353,7 +313,7 @@
     }
     .what-card {
       background: var(--card);
-      border-radius: 7px;
+      border-radius: 20px;
       border: 1px solid var(--border);
       padding: 28px 24px;
     }
@@ -397,12 +357,12 @@
        Full-bleed strip. Each card is a window.
     ───────────────────────────────────────── */
     .screenshots-outer {
-      background: #C8C9A8;
+      background: oklch(0.955 0.006 60);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: var(--section-gap) 0 calc(var(--section-gap) + 16px);
-      overflow-x: hidden; /* only clip horizontal — let box-shadow breathe vertically */
-      contain: style; /* relaxed from layout to allow shadow overflow */
+      padding: var(--section-gap) 0;
+      overflow: hidden;
+      contain: layout; /* prevent scroll-width leaking into page */
     }
     .screenshots-intro {
       padding: 0 var(--pad-x);
@@ -422,44 +382,47 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding: 0 var(--pad-x) 20px;
-      scroll-padding-left: var(--pad-x);
+      padding: 0 var(--pad-x) 4px;
       scrollbar-width: none;
     }
     .screenshots-strip::-webkit-scrollbar { display: none; }
-    /* First card — left inset matches pad-x so it aligns with page content */
+    /* First card aligned to left edge of content */
     .screenshots-strip::before {
       content: '';
-      flex: 0 0 var(--pad-x);
+      flex: 0 0 0px;
     }
     .screen-card {
       flex: 0 0 240px;
       scroll-snap-align: start;
       background: var(--card);
-      border-radius: 7px;
-      /* overflow removed — was clipping box-shadow at card boundary */
+      border-radius: 24px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      /* box-shadow removed */
+      box-shadow: 0 8px 32px oklch(0.235 0.015 65 / 0.07);
       position: relative;
     }
-    /* screen-card::after gradient removed — was overlaying caption text */
+    .screen-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--card));
+      pointer-events: none;
+    }
     .screen-card img {
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center top; /* 'top' alone clips the header at border-radius */
+      object-position: top;
       display: block;
-      border-radius: 7px 7px 0 0;
-      overflow: hidden;
     }
     .screen-card--bottom img {
       object-position: center 90%;
     }
     .screen-card--bottom2 img {
-      object-position: center 50%;
-    }
-    .screen-card--vibe img {
-      object-position: center bottom;
+      object-position: center 73%;
     }
     .screen-caption {
       padding: 16px 18px 20px;
@@ -515,16 +478,13 @@
     .note-card {
       display: block;
       background: var(--card);
-      border-radius: 7px;
+      border-radius: 20px;
       border: 1px solid var(--border);
       padding: 32px 28px;
       transition: box-shadow 0.2s;
     }
-    .note-card + .note-card {
-      margin-top: 20px;
-    }
     .note-card:hover {
-      box-shadow: 0 8px 28px rgba(26,23,20,0.08);
+      box-shadow: 0 8px 28px oklch(0.235 0.015 65 / 0.08);
     }
     .note-date {
       font-size: 12px;
@@ -572,41 +532,16 @@
     .notes-all:hover { color: var(--fg); border-color: var(--fg); }
 
     /* ─────────────────────────────────────────
-       FAQ
-    ───────────────────────────────────────── */
-    .faq {
-      padding: var(--section-gap) var(--pad-x);
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-    .faq-item {
-      margin-bottom: 32px;
-    }
-    .faq-item h3 {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--fg);
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .faq-item p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* ─────────────────────────────────────────
        AGENCIES
     ───────────────────────────────────────── */
     .agencies {
-      padding: 56px var(--pad-x) var(--section-gap);
+      padding: 0 var(--pad-x) var(--section-gap);
       max-width: var(--max-w);
       margin: 0 auto;
     }
     .agencies-card {
       background: var(--card);
-      border-radius: 7px;
+      border-radius: 20px;
       border: 1px solid var(--border);
       padding: 36px 28px;
     }
@@ -689,7 +624,7 @@
       :root {
         --section-gap: 100px;
         --pad-x: 48px;
-        --max-w: 680px;
+        --max-w: 600px;
       }
 
       /* Hero */
@@ -698,7 +633,7 @@
 
       /* What it does / doesn't — wider column + equal-height cards */
       .what {
-        max-width: 960px;
+        max-width: 840px;
       }
       .what-cards {
         display: grid;
@@ -712,7 +647,7 @@
 
       /* Screenshots — centred strip on wide viewports */
       .screenshots-intro {
-        max-width: 960px;
+        max-width: 840px;
       }
       .screenshots-strip {
         justify-content: center;
@@ -720,12 +655,12 @@
       }
       .screen-card { flex: 0 0 260px; }
       .try-link-wrap {
-        max-width: 960px;
+        max-width: 840px;
       }
 
       /* Agencies — two-column layout: text left, CTA right */
       .agencies {
-        max-width: 960px;
+        max-width: 840px;
       }
       .agencies-card {
         display: grid;
@@ -777,7 +712,8 @@
 <p class="hero-eyebrow">Private · Calm · Yours</p>
 <h1>Know your audience<br/>before you have to react.</h1>
 <p class="hero-sub">
-      A private workspace to decode confusing DMs and recognize patterns in your audience. Stop wondering if you're overreacting.
+      A private workspace where you can see patterns in how your subscribers
+      behave — calmly, on your own terms.
     </p>
 <div class="hero-cta">
 <a class="btn-primary" href="/login">Start exploring</a>
@@ -789,7 +725,9 @@
 <!-- FRAMING QUOTE -->
 <section class="framing">
 <blockquote>
-      "Your intuition is your most valuable asset. Nilea is the system to manage it. We are building the first Creator Knowledge Management platform, designed to help you externalize your tacit knowledge about your audience and transform 'gut feelings' into clear signals."
+      "Creators decide when<br/>
+      their inner circle gets to know.
+      Not content pirates."
     </blockquote>
 </section>
 <hr class="divider"/>
@@ -800,10 +738,10 @@
 <div class="what-card does-card">
 <h3>What it does</h3>
 <ul>
-<li>Decodes confusing messages from your real interactions</li>
-<li>Helps you recognize subscriber-level risk and patterns in how your subscribers behave</li>
-<li>Shows you clearly when someone is crossing a line</li>
-<li>Supports your decisions: set boundaries, ignore, or engage</li>
+<li>Collects signals from your real interactions — especially DMs</li>
+<li>Helps you group and recognise subscriber behaviour patterns</li>
+<li>Shows where something may deserve your attention</li>
+<li>Supports your decisions: monitor, set boundaries, ignore, or escalate</li>
 </ul>
 </div>
 <div class="what-card doesnt-card">
@@ -821,7 +759,7 @@
 <div class="screenshots-outer">
 <div class="screenshots-intro">
 <p class="section-label">Inside Nilea</p>
-<p>Nilea helps you externalize your intuition, turning vague 'gut feelings' into actionable insights. See how your tacit knowledge connects to real data.</p>
+<p>Real screens from the current prototype. Sign in and try it — no setup required.</p>
 </div>
 <div class="screenshots-strip">
 <div class="screen-card">
@@ -854,7 +792,7 @@
 <span>Paste a conversation or upload a screenshot.</span>
 </div>
 </div>
-<div class="screen-card screen-card--vibe">
+<div class="screen-card">
 <picture>
 <source srcset="screenshots/04_vibe_check.webp" type="image/webp"/>
 <img alt="Vibe Check locked — add handle to unlock" loading="lazy" src="screenshots/04_vibe_check.png"/>
@@ -876,64 +814,33 @@
       Short texts where we clarify how we think about creators, risk, and awareness.
       Not marketing. Not a blog. Just thinking, made visible.
     </p>
-		<a class="note-card" href="/notes/how-to-decode-confusing-dms">
-		<p class="note-date">April 2026</p>
-		<h3 class="note-title">How to Decode Confusing DMs Without Overreacting</h3>
-		<p class="note-excerpt">
-		        Every creator knows the feeling. You open a DM, and it's... confusing. Learn how to decode without overreacting and regain your agency.
-		      </p>
-		<span class="note-read">Read the full note →</span>
-		</a>
-		<a class="note-card" href="/notes/opening-an-aperture">
-		<p class="note-date">April 2026</p>
-		<h3 class="note-title">Opening an Aperture</h3>
-		<p class="note-excerpt">
-		        Nilea is evolving from a safety workspace into a Creator Knowledge Management system. We're opening an aperture to recognize the most valuable asset a creator has: their tacit knowledge.
-	      </p>
-	<span class="note-read">Read the full note →</span>
-	</a>
+<a class="note-card" href="/notes/on-naming-people">
+<p class="note-date">March 2026</p>
+<h3 class="note-title">On Naming People in Your Audience</h3>
+<p class="note-excerpt">
+        Nilea doesn't ask for a spreadsheet of your subscribers. It asks you
+        to name the people who come to mind. Usernames are for platforms.
+        Names are for how we actually think.
+      </p>
+<span class="note-read">Read the full note →</span>
+</a>
+<a class="note-card" href="/notes/why-we-dont-send-alerts">
+<p class="note-date">March 2026</p>
+<h3 class="note-title">Why We Don't Send Alerts</h3>
+<p class="note-excerpt">
+        Most tools designed to monitor risk rely on alerts. An alert is a
+        demand — it breaks your attention and forces you to react on the
+        system's terms, not your own.
+      </p>
+<span class="note-read">Read the full note →</span>
+</a>
 <div class="notes-all-wrap">
 <a class="notes-all" href="/notes/">All notes →</a>
 </div>
 </section>
-	<hr class="divider"/>
-	<!-- FAQ -->
-	<section class="faq">
-	<h2 class="section-label">Common Questions</h2>
-	<div class="faq-item">
-<h3>What is Nilea?</h3>
-		<p>
-		        Nilea is a private workspace for creators to make sense of their audience. Got a message that feels off? Don't take it to a public forum. Nilea helps you decode confusing DMs and recognize behavioral patterns, so you can stop wondering if you're overreacting and see things clearly.
-		      </p>
-	</div>
-	<div class="faq-item">
-<h3>How does Nilea help with creator safety?</h3>
-		<p>
-		        Nilea helps you navigate the blurry lines of parasocial relationships. By recognizing patterns in how fans interact with you, you can confidently set boundaries before a confusing DM turns into a real problem.
-		      </p>
-	</div>
-	<div class="faq-item">
-		<h3>Does Nilea automate subscriber management?</h3>
-		<p>
-		        No, Nilea does not automate punishments or accusations. It is a tool for awareness and decision support, ensuring you remain in control of your audience interactions.
-		      </p>
-		</div>
-		<div class="faq-item">
-		<h3>What is a parasocial relationship?</h3>
-		<p>
-		        A parasocial relationship is a one-sided emotional bond a fan forms with a creator they follow — real on the fan's side, but impossible to fully reciprocate across an entire audience. Most are harmless and are actually the engine of creator loyalty. Nilea helps you notice when one starts to shift.
-		      </p>
-		</div>
-		<div class="faq-item">
-		<h3>What is tacit knowledge, and why does Nilea care about it?</h3>
-		<p>
-		        Tacit knowledge is the understanding you carry that you cannot easily put into words — the sense that a message feels off before you can explain why. Nilea helps you externalize that intuition: give it structure, name what you observe, and act on it without second-guessing yourself.
-		      </p>
-		</div>
-		</section>
-	<hr class="divider"/>
-	<!-- AGENCIES -->
-	<section class="agencies" id="agencies">
+<hr class="divider"/>
+<!-- AGENCIES -->
+<section class="agencies" id="agencies">
 <div class="agencies-card">
 <h2>For agencies</h2>
 <p>
