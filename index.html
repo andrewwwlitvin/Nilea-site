@@ -788,6 +788,12 @@
         grid-row: 3;
         margin-top: 20px;
       }
+
+      .desktop-only { display: inline; }
+    }
+
+    @media (max-width: 639px) {
+      .desktop-only { display: none; }
     }
   </style>
 </head>
@@ -807,8 +813,8 @@
 <section class="hero">
 <p class="hero-eyebrow">Private · Calm · Yours</p>
 <h1>Know your audience<br/>before you have to react.</h1>
-<p class="hero-sub">
-      A private workspace to decode confusing DMs and recognize patterns in your audience. Stop wondering if you're overreacting.
+    <p class="hero-sub">
+      A private workspace to decode confusing DMs and recognize patterns in your audience.<br class="desktop-only"> Stop wondering if you're overreacting.
     </p>
 <div class="hero-cta">
 <a class="btn-primary" href="/login">Start exploring</a>
@@ -851,9 +857,9 @@
 <!-- SCREENSHOTS -->
 <div class="screenshots-outer">
 <div class="screenshots-intro">
-<p class="section-label">Inside Nilea</p>
-<p>Nilea helps you externalize your intuition, turning vague 'gut feelings' into actionable insights. See how your tacit knowledge connects to real data.</p>
-</div>
+    <p class="section-label">Inside Nilea</p>
+    <p>Nilea helps you externalize your intuition, turning vague 'gut feelings' into actionable insights.<br class="desktop-only"> See how your tacit knowledge connects to real data.</p>
+    </div>
 <div class="screenshots-strip">
 <div class="screen-card">
 <picture>
@@ -903,8 +909,8 @@
 <!-- NOTES -->
 <section class="notes">
 <h2 class="section-label">Notes</h2>
-<p class="notes-desc">
-      Short texts where we clarify how we think about creators, risk, and awareness.
+    <p class="notes-desc">
+      Short texts where we clarify how we think about creators, risk, and awareness.<br class="desktop-only">
       Not marketing. Not a blog. Just thinking, made visible.
     </p>
 		<a class="note-card" href="/notes/how-to-decode-confusing-dms">

@@ -223,6 +223,12 @@
       :root { --pad-x: 48px; }
       .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
       .page-header { padding: 80px 0 56px; }
+
+      .desktop-only { display: inline; }
+    }
+
+    @media (max-width: 639px) {
+      .desktop-only { display: none; }
     }
   </style>
 </head>
@@ -244,7 +250,7 @@
     <header class="page-header">
       <p class="label">Notes</p>
       <h1>How we think.</h1>
-      <p>Short texts where we clarify how we think about creators, risk, and awareness. Not marketing. Not a blog. Just thinking, made visible.</p>
+      <p>Short texts where we clarify how we think about creators, risk, and awareness.<br class="desktop-only"> Not marketing. Not a blog. Just thinking, made visible.</p>
     </header>
 
     <ul class="notes-list">
