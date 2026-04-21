@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -11,16 +12,16 @@
 </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Why We Don't Send Alerts — Nilea Notes</title>
-<meta content="Understanding your audience means recognizing the emotional labor involved. Nilea respects your attention and helps you make decisions on your own terms, not under pressure." name="description"/>
+<title>What Nilea Is (and What It Isn't) — Nilea Notes</title>
+<meta content="Nilea is a creator knowledge management system that helps you understand your audience through real interaction signals. Built for creators who want clarity about what their audience is really telling them." name="description"/>
 <meta content="index,follow" name="robots"/>
-<link href="https://nilea.io/notes/why-we-dont-send-alerts" rel="canonical"/>
+<link href="https://nilea.io/notes/what-nilea-is/" rel="canonical"/>
 <!-- Open Graph -->
 <meta content="en_US" property="og:locale"/>
 <meta content="article" property="og:type"/>
-<meta content="Why We Don't Send Alerts — Nilea Notes" property="og:title"/>
-<meta content="Understanding your audience means recognizing the emotional labor involved. Nilea respects your attention and helps you make decisions on your own terms, not under pressure." property="og:description"/>
-<meta content="https://nilea.io/notes/why-we-dont-send-alerts" property="og:url"/>
+<meta content="What Nilea Is (and What It Isn't) — Nilea Notes" property="og:title"/>
+<meta content="Nilea is a creator knowledge management system that helps you understand your audience through real interaction signals. Built for creators who want clarity about what their audience is really telling them." property="og:description"/>
+<meta content="https://nilea.io/notes/what-nilea-is/" property="og:url"/>
 <meta content="https://nilea.io/og-image.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
@@ -30,16 +31,16 @@
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="@nilea_io" name="twitter:site"/>
-<meta content="Why We Don't Send Alerts — Nilea Notes" name="twitter:title"/>
-<meta content="Understanding your audience means recognizing the emotional labor involved. Nilea respects your attention and helps you make decisions on your own terms, not under pressure." name="twitter:description"/>
+<meta content="What Nilea Is (and What It Isn't) — Nilea Notes" name="twitter:title"/>
+<meta content="Nilea is a creator knowledge management system that helps you understand your audience through real interaction signals. Built for creators who want clarity about what their audience is really telling them." name="twitter:description"/>
 <meta content="https://nilea.io/og-image.png" name="twitter:image"/>
 <!-- Structured Data -->
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Why We Don't Send Alerts",
-  "description": "Most tools designed to monitor risk rely on alerts. We believe this is a mistake. Here is why Nilea is built differently.",
-  "url": "https://nilea.io/notes/why-we-dont-send-alerts",
+  "headline": "What Nilea Is (and What It Isn't)",
+  "description": "Nilea is not a CRM, not an analytics dashboard, not an AI chatbot. It is a quiet layer of pattern recognition built on top of your real interactions.",
+  "url": "https://nilea.io/notes/what-nilea-is/",
   "publisher": {
     "@type": "Organization",
     "name": "Nilea",
@@ -47,10 +48,10 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://nilea.io/notes/why-we-dont-send-alerts"
+    "@id": "https://nilea.io/notes/what-nilea-is/"
   },
-  "datePublished": "2026-03-23",
-  "dateModified": "2026-03-23",
+  "datePublished": "2026-01-08",
+  "dateModified": "2026-03-22",
   "author": {
     "@type": "Organization",
     "name": "Nilea HQ",
@@ -75,8 +76,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Why We Don't Send Alerts",
-      "item": "https://nilea.io/notes/why-we-dont-send-alerts"
+      "name": "What Nilea Is (and What It Isn't)",
+      "item": "https://nilea.io/notes/what-nilea-is/"
     }
   ]
 }</script>
@@ -87,6 +88,7 @@
 <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Font preloads — critical latin subsets fetched before stylesheet parses -->
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6z9mXgjU0.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKeiunDZbtPK_l2qI0s.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="anonymous" href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXt_A-X-oE0qsEw.woff2" rel="preload" type="font/woff2"/>
@@ -189,7 +191,7 @@
 
     .article-body p:last-child { margin-bottom: 0; }
 
-    /* Pull quote */
+    /* Pull quote — a single sentence that deserves its own moment */
     .article-body .pull {
       font-family: var(--serif);
       font-style: italic;
@@ -201,17 +203,13 @@
       margin: 44px 0;
     }
 
-    /* PREV / NEXT NOTE */
+            /* NEXT NOTE */
     .next-note {
       border-top: 1px solid var(--border);
       padding: 40px 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-    .next-note-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted);
+      gap: 12px;
     }
     .next-note-title {
       font-family: var(--serif); font-size: 20px; font-weight: 700;
@@ -272,21 +270,19 @@
 <a class="back-link" href="/notes/">All notes</a>
 <header class="article-header">
 <p class="article-label">Notes</p>
-<h1 class="article-title">Why We Don't Send Alerts</h1>
-<p class="article-meta">March 2026</p>
+<h1 class="article-title">What Nilea Is (and What It Isn't)</h1>
+<p class="article-meta">January 2026</p>
 </header>
 <main>
 <article class="article-body">
-<p>Alert-based risk monitoring is a system design that relies on immediate interruptions—like red banners or push notifications—to signal potential issues. Most tools designed to monitor risk rely on alerts. The thinking is that if something might be wrong, you should be interrupted immediately. But this constant state of alert contributes to creator anxiety and fan behavior becoming a source of stress, not a source of connection.</p>
-<p>We believe this is a mistake. An alert is a demand. It breaks your attention and pulls you out of your life, forcing you to react on the system’s terms, not your own. The emotional labor of creators is already high; adding a stream of notifications only increases it.</p>
-<p>Nilea is not an alarm system. It is a calm workspace for creators, a space for quiet reflection.</p>
-<p class="pull">Instead of pushing information out, it provides a place for you to come in.</p>
-<p>A place to see what’s happening in your audience, to notice patterns, and to decide what matters — all on your own schedule. The goal is to restore a sense of agency, not to create another stream of notifications that you have to manage.</p>
-<p>We don’t send alerts because your attention is the most valuable thing you have. You should be the one to decide where it goes.</p>
+<p>Proactive creator safety begins with a simple observation: for many creators, the hardest part of their work is not creating content. It is living with uncertainty — around who sees it, where it travels, and when it might surface in places that matter personally. Most platforms have creator platform safety gaps; their tools enter the situation late, responding after something has already happened with enforcement or takedowns.</p>
+<p>Nilea looks earlier. It is a private control space for creators, built around awareness: understanding risk before it becomes an incident, and understanding one's audience before reacting to it.</p>
+<p class="pull">This does not mean preventing everything. It means seeing the situation more clearly, so decisions can be made deliberately — not under pressure.</p>
+<p>Nilea is not a takedown service or an enforcement platform. It does not decide what should be removed, hidden, or blocked. Instead, it brings signals and findings into one place for review — quietly, without urgency.</p>
+<p>Being a creator should not mean losing control over when and how personal exposure happens. Creators decide when their inner circle gets to know. Not content pirates. Not platforms. And not tools acting on their behalf. This is the safety gap Nilea is exploring.</p>
 </article>
 <div class="next-note">
-<a class="next-note-title" href="/notes/shape-of-an-idea">← The Shape of an Idea</a>
-<a class="next-note-title" href="/notes/on-naming-people">On Naming People in Your Audience →</a>
+<a class="next-note-title" href="/notes/shape-of-an-idea/">The Shape of an Idea →</a>
 </div>
 </div>
 <footer>
